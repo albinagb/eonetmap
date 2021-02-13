@@ -1,0 +1,27 @@
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+
+  font-family: "Avenir", "Helvetica", sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+  background-clip: inherit;
+}
+
+#mapId {
+  height: 30rem;
+  width: 60rem;
+  margin: 2rem;
+  /* background-color: yellow; */
+}
+
+h1 {
+  color: red;
+  margin: 2rem;
+}
