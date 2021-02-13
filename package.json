@@ -1,0 +1,25 @@
+{
+  "name": "pricemap",
+  "version": "1.0.0",
+  "description": "price analysis",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/albinagb/pricemap.git"
+  },
+  "author": "Albina G",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/albinagb/pricemap/issues"
+  },
+  "homepage": "https://github.com/albinagb/pricemap#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "engines": {
+    "node": "14.x"
+  }
+}
