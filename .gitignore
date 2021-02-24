@@ -1,8 +1,0 @@
-node_modules
-npm-debug.log
-.cache/
-dist/
-.env
-.DS_Store
-coverage/
-.vscode/
