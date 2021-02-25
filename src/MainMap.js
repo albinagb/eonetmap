@@ -13,9 +13,21 @@ let dataClean = [];
 data.forEach((element) => {
   dataClean.push({
     position: { lng: element.Longitude, lat: element.Latitude },
-    text: element.PostalCode,
+    text: priceData(element),
   });
 });
+
+// Price Data Log function
+
+function priceData(element) {
+  let labelText = `No.: ${element.MlsNumber}, ${element.Bedrooms} rooms</br>
+  ${element.ListingAddress}</br></br>`;
+  const data = element.history;
+  data[0].forEach((element, indx) => {
+    labelText = `${labelText} ∙ ${element}: ${data[1][indx]} </br>`;
+  });
+  return labelText;
+}
 
 const MainMap = () => {
   const [markers, setMarkers] = useState(dataClean);
@@ -26,7 +38,7 @@ const MainMap = () => {
 
   return (
     <>
-      <Map center={position} zoom={2} style={mapStyle} maxZoom={20}>
+      <Map center={position} zoom={2} style={mapStyle} maxZoom={18}>
         <TileLayer
           url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
