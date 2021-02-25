@@ -26,6 +26,9 @@ function priceData(element) {
   data[0].forEach((element, indx) => {
     labelText = `${labelText} ∙ ${element}: ${data[1][indx]} </br>`;
   });
+
+  labelText = `${labelText}</br>${element.days_on_market} days on market</br>status: ${element.status}`;
+
   return labelText;
 }
 
