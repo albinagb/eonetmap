@@ -33,9 +33,9 @@ function priceData(element) {
 const MainMap = () => {
   const [markers, setMarkers] = useState(dataClean);
 
-  const handleClick = () => {
-    setMarkers(dataClean);
-  };
+  // const handleClick = () => {
+  //   setMarkers(dataClean);
+  // };
 
   return (
     <>
@@ -46,7 +46,6 @@ const MainMap = () => {
         />
         <MarkerCluster markers={markers} />
       </Map>
-      <button onClick={handleClick}>Change cluster</button>
     </>
   );
 };
