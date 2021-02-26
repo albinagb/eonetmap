@@ -41,7 +41,7 @@ function LeafletgeoSearch() {
   return null;
 }
 
-// Price Data Log function
+// Price Data Log function - new
 
 function priceData(element) {
   let labelText = `No.: ${element.MlsNumber}, ${element.Bedrooms} rooms</br>
