@@ -1,9 +1,5 @@
 import React, { useState } from "react";
 import { Map, TileLayer } from "react-leaflet";
-
-import "leaflet-geosearch/dist/geosearch.css";
-import { GeoSearchControl, OpenStreetMapProvider } from "leaflet-geosearch";
-
 import MarkerCluster from "./MarkerCluster";
 import data from "./data";
 
@@ -18,28 +14,6 @@ data.forEach((element) => {
     text: priceData(element),
   });
 });
-
-// Search Element
-
-function LeafletgeoSearch() {
-  const map = useMap();
-  useEffect(() => {
-    const provider = new OpenStreetMapProvider();
-
-    const searchControl = new GeoSearchControl({
-      provider,
-      marker: {
-        icon,
-      },
-    });
-
-    map.addControl(searchControl);
-
-    return () => map.removeControl(searchControl);
-  }, []);
-
-  return null;
-}
 
 // Price Data Log function - new
 
@@ -70,7 +44,6 @@ const MainMap = () => {
           url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         />
-        <LeafletgeoSearch />
         <MarkerCluster markers={markers} />
       </Map>
       <button onClick={handleClick}>Change cluster</button>
