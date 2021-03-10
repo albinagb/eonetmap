@@ -1,37 +1,27 @@
 import React, { useState } from "react";
 
-export default function Filters({ data, dataClean, PriceData, setMarkers }) {
+export default function Filters({ data, PriceData, setMarkers }) {
   const [bedrooms, setBedrooms] = useState("All");
   const [status, setStatus] = useState("All");
 
-  dataClean = [];
-
   if (bedrooms !== "All") {
-    dataClean = [];
-    data.forEach((element) => {
-      if (element.Bedrooms == bedrooms) {
-        dataClean.push({
-          position: { lng: element.Longitude, lat: element.Latitude },
-          text: PriceData(element),
-        });
-      }
-    });
+    data = data.filter((item) => item.Bedrooms == bedrooms);
   }
 
   if (status !== "All") {
-    dataClean = [];
-    data.forEach((element) => {
-      if (element.status === status) {
-        dataClean.push({
-          position: { lng: element.Longitude, lat: element.Latitude },
-          text: PriceData(element),
-        });
-      }
-    });
+    data = data.filter((item) => item.status === status);
+    // console.log(`data status: ${data.length}`);
   }
 
-  // Submit Function
+  let dataClean = [];
+  data.forEach((element) => {
+    dataClean.push({
+      position: { lng: element.Longitude, lat: element.Latitude },
+      text: PriceData(element),
+    });
+  });
 
+  // Submit Function
   const handleSubmit = (event) => {
     event.preventDefault();
     setMarkers(dataClean);
@@ -46,7 +36,6 @@ export default function Filters({ data, dataClean, PriceData, setMarkers }) {
             id="bedrooms"
             value={bedrooms}
             onChange={(event) => setBedrooms(event.target.value)}
-            onBloor={(event) => setBedrooms(event.target.value)}
           >
             <option>All</option>
             <option>1</option>
@@ -62,7 +51,6 @@ export default function Filters({ data, dataClean, PriceData, setMarkers }) {
             id="status"
             value={status}
             onChange={(event) => setStatus(event.target.value)}
-            onBloor={(event) => setStatus(event.target.value)}
           >
             <option>All</option>
             <option>Available</option>
