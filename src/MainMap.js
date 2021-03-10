@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Map, TileLayer } from "react-leaflet";
 import Filters from "./Filters";
 import MarkerCluster from "./MarkerCluster";
@@ -25,7 +25,7 @@ function PriceData(element) {
     labelText = `${labelText} ∙ ${element}: ${data[1][indx]} </br>`;
   });
 
-  labelText = `${labelText}</br>${element.days_on_market} days on market</br>status: ${element.status}`;
+  labelText = `${labelText}</br>${element.weeks_on_market} weeks on market</br>status: ${element.status}`;
 
   return labelText;
 }

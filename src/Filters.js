@@ -1,84 +1,73 @@
 import React, { useState } from "react";
 
 export default function Filters({ data, dataClean, PriceData, setMarkers }) {
-  const [checked, setChecked] = useState(false);
-  // const [optionsState, setSelected] = useState("");
+  const [bedrooms, setBedrooms] = useState("All");
+  const [status, setStatus] = useState("All");
 
   dataClean = [];
 
-  if (checked) {
+  if (bedrooms !== "All") {
+    dataClean = [];
     data.forEach((element) => {
-      if (element.Bedrooms === 2) {
+      if (element.Bedrooms == bedrooms) {
         dataClean.push({
           position: { lng: element.Longitude, lat: element.Latitude },
           text: PriceData(element),
         });
       }
     });
-  } else {
-    console.log(`not checked ${dataClean.length}`);
+  }
+
+  if (status !== "All") {
+    dataClean = [];
     data.forEach((element) => {
-      dataClean.push({
-        position: { lng: element.Longitude, lat: element.Latitude },
-        text: PriceData(element),
-      });
+      if (element.status === status) {
+        dataClean.push({
+          position: { lng: element.Longitude, lat: element.Latitude },
+          text: PriceData(element),
+        });
+      }
     });
   }
 
   // Submit Function
 
-  console.log(`global ${dataClean.length}`);
-
   const handleSubmit = (event) => {
     event.preventDefault();
     setMarkers(dataClean);
-    console.log(`2 handleSubmit ${dataClean.length}`);
   };
-
-  // Check the status of properties
-
-  // function handleChange(e) {
-  //   setSelected(e.target.value);
-  // }
-
-  // function showStatus(e) {
-  //   dataClean = [];
-  //   console.log(`showStatus e ${e}`);
-  //   if (e === "removed") {
-  //     let statusResult = data.filter((element) => element.status === "Removed");
-  //     statusResult.forEach((element) => {
-  //       dataClean.push({
-  //         position: { lng: element.Longitude, lat: element.Latitude },
-  //         text: PriceData(element),
-  //       });
-  //     });
-  //     console.log(dataClean);
-  //   } else if (e === "available") {
-  //     let statusResult = data.filter(
-  //       (element) => element.status === "Available"
-  //     );
-  //     statusResult.forEach((element) => {
-  //       dataClean.push({
-  //         position: { lng: element.Longitude, lat: element.Latitude },
-  //         text: PriceData(element),
-  //       });
-  //     });
-  //     console.log(dataClean);
-  //   }
-  //   console.log(`showStatus ${dataClean.length}`);
-  //   return dataClean;
-  // }
 
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <label>
-          2 bedrooms:
-          <input
-            type="checkbox"
-            value="{checked}"
-            onChange={() => setChecked((checked) => !checked)}
-          />
+        <label htmlFor="bedrooms">
+          Bedrooms
+          <select
+            id="bedrooms"
+            value={bedrooms}
+            onChange={(event) => setBedrooms(event.target.value)}
+            onBloor={(event) => setBedrooms(event.target.value)}
+          >
+            <option>All</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+          </select>
+        </label>
+
+        <label htmlFor="status">
+          Status
+          <select
+            id="status"
+            value={status}
+            onChange={(event) => setStatus(event.target.value)}
+            onBloor={(event) => setStatus(event.target.value)}
+          >
+            <option>All</option>
+            <option>Available</option>
+            <option>Removed</option>
+          </select>
         </label>
 
         <input className="button" type="submit" value="Submit" />
