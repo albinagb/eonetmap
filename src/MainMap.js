@@ -35,12 +35,7 @@ const MainMap = ({ data = [] }) => {
   const [markers, setMarkers] = useState(dataClean);
   return (
     <>
-      <Filters
-        data={data}
-        setMarkers={setMarkers}
-        PriceData={PriceData}
-        dataClean={NewDataArray}
-      />
+      <Filters data={data} setMarkers={setMarkers} PriceData={PriceData} />
       <Map center={position} zoom={2} style={mapStyle} maxZoom={18}>
         <TileLayer
           url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
