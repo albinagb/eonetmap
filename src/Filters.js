@@ -6,6 +6,7 @@ export default function Filters({ data, PriceData, setMarkers }) {
   const [bedrooms, setBedrooms] = useState("All");
   const [status, setStatus] = useState("All");
   const [price, setPrice] = useState([0, 600000]);
+  const [mls, setMls] = useState("");
 
   const rangeSelector = (e, newValue) => {
     setPrice(newValue);
@@ -15,6 +16,11 @@ export default function Filters({ data, PriceData, setMarkers }) {
   // console.log(`price: ${price}`)
   
   data = data.filter((item) => (item.Price >= price[0])&&(item.Price <= price[1]));
+  
+  if(mls !== "") {
+    data = data.filter((el) => (el.MlsNumber == mls));
+  }
+  
 
   if (bedrooms !== "All") {
     data = data.filter((item) => item.Bedrooms == bedrooms);
@@ -41,11 +47,12 @@ export default function Filters({ data, PriceData, setMarkers }) {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <div className="filterBox">
-          <label htmlFor="bedrooms">
+      <form className="mx-4 my-3 row gx-3 gy-2 align-items-center" onSubmit={handleSubmit}>
+        
+          <label className= "col-sm-1" htmlFor="bedrooms">
             Bedrooms
             <select
+              className = "form-control" 
               id="bedrooms"
               value={bedrooms}
               onChange={(event) => setBedrooms(event.target.value)}
@@ -58,9 +65,10 @@ export default function Filters({ data, PriceData, setMarkers }) {
             </select>
           </label>
 
-          <label htmlFor="status">
+          <label className= "col-sm-1" htmlFor="status">
             Status
-            <select
+            <select 
+              className = "form-control" 
               id="status"
               value={status}
               onChange={(event) => setStatus(event.target.value)}
@@ -70,7 +78,15 @@ export default function Filters({ data, PriceData, setMarkers }) {
               <option>Removed</option>
             </select>
           </label>
-          <div id="sliderBox">
+
+          <label className= "col-sm-2" htmlFor="mls"> Search by MLS 
+          <input className = "form-control" id="mls" 
+          value={mls} 
+          placeholder="MLS"
+          onChange={(e) => setMls(e.target.value)} /> 
+          </label>
+
+          <div className= "col-sm-3" id="sliderBox">
             <Typography id="range-slider" gutterBottom>
               Select Price Range:
             </Typography>
@@ -84,8 +100,7 @@ export default function Filters({ data, PriceData, setMarkers }) {
             />
             Price is between {price[0]} /- and {price[1]} /-
           </div>
-          <input className="button" type="submit" value="Submit" />
-        </div>
+          <input className="btn btn-light col-auto" type="submit" value="Submit" />
         
       </form>
     </>

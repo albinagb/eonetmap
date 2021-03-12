@@ -36,13 +36,15 @@ const MainMap = ({ data = [] }) => {
   return (
     <>
       <Filters data={data} setMarkers={setMarkers} PriceData={PriceData} />
-      <Map center={position} zoom={2} style={mapStyle} maxZoom={18}>
+     
+      <Map id="map" center={position} zoom={2} style={mapStyle} maxZoom={18}>
         <TileLayer
           url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         />
         <MarkerCluster markers={markers} />
       </Map>
+      
     </>
   );
 };

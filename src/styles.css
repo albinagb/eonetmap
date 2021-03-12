@@ -8,23 +8,7 @@ html {
   font-weight: 400;
 }
 
-form {
-  margin: 1rem;
-  
-}
 
-.filterBox {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  font-size: 1.2em;
-  margin-bottom: 1em;
-  margin: 0 auto;
-  padding: 1rem 1rem;
-  background-color: #ffffff;
-  border-radius: 5rem;
-  box-shadow: 0 0.1rem 0.5rem rgba(97, 65, 55, 0.3);
-  
-}
 
 #sliderBox {
   margin: auto;
@@ -32,23 +16,3 @@ form {
   width: fit-content;
 }
 
-.button {
-  color: darkslateblue;
-  border: none;
-  font-size: 1rem;
-  /* text-decoration: none; */
-  position: relative;
-  padding: 5px 10px;
-  -webkit-box-shadow: 2px 2px 0 #666;
-  -moz-box-shadow: 2px 2px 0 #666;
-  -webkit-transition: all 0.3s ease;
-  -moz-transition: all 0.3s ease;
-  margin: 0 10px 0 10px;
-}
-
-.button:hover {
-  -webkit-box-shadow: 0px 0px 0 rgb(136, 135, 135);
-  -moz-box-shadow: 0px 0px 0 rgb(158, 157, 157);
-  top: 5px;
-  left: 5px;
-}
