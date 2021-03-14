@@ -12,6 +12,10 @@ export default function Filters({ data, PriceData, setMarkers }) {
     setPrice(newValue);
     // console.log(`Value 1: ${newValue[0]} ---  Value 2: ${newValue[1]}`)
   };
+
+ let newData = (Object.keys(data[0]).map(el => {
+    console.log(el)
+  }));
   
   // console.log(`price: ${price}`)
   

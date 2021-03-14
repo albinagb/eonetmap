@@ -18,14 +18,14 @@ function NewDataArray(data) {
 }
 
 function PriceData(element) {
-  let labelText = `No.: ${element.MlsNumber}, ${element.Bedrooms} rooms</br>
+  let labelText = `No.: ${element.MlsNumber}, ${element.Bedrooms} rooms, ${element.Parking} parking</br>
   ${element.ListingAddress}</br></br>`;
   const data = element.history;
   data[0].forEach((element, indx) => {
     labelText = `${labelText} ∙ ${element}: ${data[1][indx]} </br>`;
   });
 
-  labelText = `${labelText}</br>${element.weeks_on_market} weeks on market</br>status: ${element.status}`;
+  labelText = `${labelText}</br>${element.weeks_on_market} weeks on market</br>status as of ${element.updated}: ${element.status}`;
 
   return labelText;
 }
