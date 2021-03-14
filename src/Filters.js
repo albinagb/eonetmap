@@ -13,10 +13,13 @@ export default function Filters({ data, PriceData, setMarkers }) {
     // console.log(`Value 1: ${newValue[0]} ---  Value 2: ${newValue[1]}`)
   };
 
- let newData = (Object.keys(data[0]).map(el => {
-    console.log(el)
-  }));
-  
+  // Object keys
+
+//  let propertyDataKeys = (Object.keys(data[0]).map(el => {
+//     console.log(el)
+//   }));
+
+
   // console.log(`price: ${price}`)
   
   data = data.filter((item) => (item.Price >= price[0])&&(item.Price <= price[1]));
