@@ -8,7 +8,11 @@ html {
   font-weight: 400;
 }
 
-
+.big-cx {
+  width: 1rem; 
+  height: 1rem;
+  margin-top: 0rem;
+}
 
 #sliderBox {
   margin: auto;

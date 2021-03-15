@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
 
-const WEEKS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+const WEEKS = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export default function Filters({ data, PriceData, setMarkers }) {
   const [bedrooms, setBedrooms] = useState("All");
@@ -10,6 +10,7 @@ export default function Filters({ data, PriceData, setMarkers }) {
   const [price, setPrice] = useState([0, 600000]);
   const [mls, setMls] = useState("");
   const [weeks, setWeeks] = useState("");
+  const [checked, setChecked] = useState(false);
 
   const rangeSelector = (e, newValue) => {
     setPrice(newValue);
@@ -28,9 +29,9 @@ export default function Filters({ data, PriceData, setMarkers }) {
     data = data.filter((el) => (el.MlsNumber == mls));
   }
 
-  if (weeks !== "Weeks") {
-    data = data.filter((item) => item.weeks_on_market == weeks);
-  }
+  if (weeks !== "Over") {
+    data = data.filter((item) => item.weeks_on_market >= weeks);
+  } 
   
 
   if (bedrooms !== "All") {
@@ -39,8 +40,11 @@ export default function Filters({ data, PriceData, setMarkers }) {
 
   if (status !== "All") {
     data = data.filter((item) => item.status === status);
-    // console.log(`data status: ${data.length}`);
   }
+
+  if (checked) {
+    data = data.filter((el) => el.weeks_on_market == 0);
+  } 
 
   let dataClean = [];
   data.forEach((element) => {
@@ -97,8 +101,8 @@ export default function Filters({ data, PriceData, setMarkers }) {
           onChange={(e) => setMls(e.target.value)} /> 
           </label>
 
-          <label className= "col-sm-2"  htmlFor="weeks">
-          Weeks on market
+          <label className= "col-sm-1"  htmlFor="weeks">
+          Weeks
           <select
           className = "form-control" 
             id="weeks"
@@ -106,13 +110,24 @@ export default function Filters({ data, PriceData, setMarkers }) {
             onChange={(e) => setWeeks(e.target.value)}
             onBlur={(e) => setWeeks(e.target.value)}
           >
-           <option>Weeks over</option>
+           <option>Over</option>
             {WEEKS.map((weeks) => (
               <option key={weeks} value={weeks}>
                 {weeks}
               </option>
             ))}
           </select>
+        </label>
+         
+        <label className="btn btn-outline-secondary">
+          New:
+          <input
+          // className="form-check-input big-cx"
+          className="btn-check big-cx" id="btn-check-outlined"
+            type="checkbox"
+            value="{checked}"
+            onChange={() => setChecked((checked) => !checked)}
+          />
         </label>
 
           <div className= "col-sm-3" id="sliderBox">
