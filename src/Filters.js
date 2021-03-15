@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
 
+const WEEKS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
 export default function Filters({ data, PriceData, setMarkers }) {
   const [bedrooms, setBedrooms] = useState("All");
   const [status, setStatus] = useState("All");
   const [price, setPrice] = useState([0, 600000]);
   const [mls, setMls] = useState("");
+  const [weeks, setWeeks] = useState("");
 
   const rangeSelector = (e, newValue) => {
     setPrice(newValue);
@@ -18,14 +21,15 @@ export default function Filters({ data, PriceData, setMarkers }) {
 //  let propertyDataKeys = (Object.keys(data[0]).map(el => {
 //     console.log(el)
 //   }));
-
-
-  // console.log(`price: ${price}`)
   
   data = data.filter((item) => (item.Price >= price[0])&&(item.Price <= price[1]));
   
   if(mls !== "") {
     data = data.filter((el) => (el.MlsNumber == mls));
+  }
+
+  if (weeks !== "Weeks") {
+    data = data.filter((item) => item.weeks_on_market == weeks);
   }
   
 
@@ -93,6 +97,24 @@ export default function Filters({ data, PriceData, setMarkers }) {
           onChange={(e) => setMls(e.target.value)} /> 
           </label>
 
+          <label className= "col-sm-2"  htmlFor="weeks">
+          Weeks on market
+          <select
+          className = "form-control" 
+            id="weeks"
+            value={weeks}
+            onChange={(e) => setWeeks(e.target.value)}
+            onBlur={(e) => setWeeks(e.target.value)}
+          >
+           <option>Weeks over</option>
+            {WEEKS.map((weeks) => (
+              <option key={weeks} value={weeks}>
+                {weeks}
+              </option>
+            ))}
+          </select>
+        </label>
+
           <div className= "col-sm-3" id="sliderBox">
             <Typography id="range-slider" gutterBottom>
               Select Price Range:
@@ -105,7 +127,7 @@ export default function Filters({ data, PriceData, setMarkers }) {
               onChange={rangeSelector}
               valueLabelDisplay="auto"
             />
-            Price is between {price[0]} /- and {price[1]} /-
+            Price is between {price[0]} and {price[1]}
           </div>
           <input className="btn btn-light col-auto" type="submit" value="Submit" />
         
