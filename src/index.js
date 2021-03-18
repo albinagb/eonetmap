@@ -13,7 +13,6 @@ const App = () => {
     <>
       
       <MainMap data={data} />
-      <Hero />
     </>
   );
 };
