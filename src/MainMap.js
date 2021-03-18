@@ -72,4 +72,3 @@ const MainMap = ({ data = [] }) => {
 };
 
 export default MainMap;
-

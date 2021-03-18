@@ -20,8 +20,6 @@ html {
 }
 
 .map {
-  margin: 0;
-  padding: 0;
   position: relative;
   z-index: 0;
 }
@@ -41,11 +39,7 @@ html {
   position: absolute;
   background-color: rgba(54, 115, 80, 0.7);
   z-index: 2;
-  display: flex;
-  flex-flow: column wrap;
-  align-items: left;
-  justify-content: left;
-  width: 25%;
+  width: 23%;
   height: 100vh;
 }
 
@@ -60,4 +54,3 @@ html {
   display: block;
   width: fit-content;
 } */
-

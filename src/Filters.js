@@ -76,10 +76,12 @@ export default function Filters({ data, PriceData, setMarkers }) {
 
   return (
     <>
-      <form
-        className="greenForm mx-4 my-3 row gx-3 gy-2 align-items-center"
-        onSubmit={handleSubmit}
-      >
+      <form className="greenForm px-4 py-2" onSubmit={handleSubmit}>
+        <button
+          type="button"
+          className="btn-close btn-close-white"
+          aria-label="Close"
+        ></button>
         <h2>Filters</h2>
         <label className="" htmlFor="bedrooms">
           Bedrooms
@@ -175,4 +177,3 @@ export default function Filters({ data, PriceData, setMarkers }) {
     </>
   );
 }
-
