@@ -4,6 +4,7 @@ import Slider from "@material-ui/core/Slider";
 
 import { customMarker } from "./constants";
 import { RedMarker } from "./RedMarker";
+import { Form, Button, Select } from "semantic-ui-react";
 
 const WEEKS = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
@@ -76,17 +77,16 @@ export default function Filters({ data, PriceData, setMarkers }) {
 
   return (
     <>
-      <form className="greenForm px-4 py-2" onSubmit={handleSubmit}>
-        <button
-          type="button"
-          className="btn-close btn-close-white"
-          aria-label="Close"
-        ></button>
+      <Form className="greenForm" onSubmit={handleSubmit}>
+        <div>
+          <i aria-hidden="true" className="close link icon"></i>
+        </div>
+
         <h2>Filters</h2>
         <label className="" htmlFor="bedrooms">
           Bedrooms
           <select
-            className="form-control"
+            className=""
             id="bedrooms"
             value={bedrooms}
             onChange={(event) => setBedrooms(event.target.value)}
@@ -102,7 +102,7 @@ export default function Filters({ data, PriceData, setMarkers }) {
         <label className="" htmlFor="status">
           Status
           <select
-            className="form-control"
+            className=""
             id="status"
             value={status}
             onChange={(event) => setStatus(event.target.value)}
@@ -117,7 +117,7 @@ export default function Filters({ data, PriceData, setMarkers }) {
           {" "}
           Search by MLS
           <input
-            className="form-control"
+            className=""
             id="mls"
             value={mls}
             placeholder="MLS"
@@ -128,7 +128,7 @@ export default function Filters({ data, PriceData, setMarkers }) {
         <label className="" htmlFor="weeks">
           Weeks
           <select
-            className="form-control"
+            className=""
             id="weeks"
             value={weeks}
             onChange={(e) => setWeeks(e.target.value)}
@@ -143,11 +143,11 @@ export default function Filters({ data, PriceData, setMarkers }) {
           </select>
         </label>
 
-        <label className="btn btn-outline-secondary">
+        <label className="">
           New:
           <input
-            className="btn-check big-cx"
-            id="btn-check-outlined"
+            className=""
+            id=""
             type="checkbox"
             value="{checked}"
             onChange={() => setChecked((checked) => !checked)}
@@ -168,12 +168,9 @@ export default function Filters({ data, PriceData, setMarkers }) {
           />
           Price is between {price[0]} and {price[1]}
         </div>
-        <input
-          className="btn btn-light col-auto"
-          type="submit"
-          value="Submit"
-        />
-      </form>
+
+        <input className="ui button" type="submit" value="Submit" />
+      </Form>
     </>
   );
 }

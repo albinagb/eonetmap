@@ -24,6 +24,10 @@ html {
   z-index: 0;
 }
 
+i {
+  color: white;
+}
+
 .leaflet-control-container {
   position: relative;
   z-index: 3;
