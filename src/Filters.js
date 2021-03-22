@@ -77,96 +77,108 @@ export default function Filters({ data, PriceData, setMarkers }) {
 
   return (
     <>
-      <Form className="greenForm" onSubmit={handleSubmit}>
-        <div>
-          <i aria-hidden="true" className="close link icon"></i>
+      <Form className="greenForm " onSubmit={handleSubmit}>
+        <div className="ui grid">
+          <div className="two column row">
+            <div className="left floated column">
+              <h2>Filters</h2>
+            </div>
+            <div className="right floated column">
+              <i aria-hidden="true" className="close link icon"></i>
+            </div>
+          </div>
+
+          <div className="two column row">
+            <label className="left floated column" htmlFor="bedrooms">
+              Bedrooms
+              <select
+                className=""
+                id="bedrooms"
+                value={bedrooms}
+                onChange={(event) => setBedrooms(event.target.value)}
+              >
+                <option>All</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+              </select>
+            </label>
+
+            <label className="right floated column" htmlFor="status">
+              Status
+              <select
+                className="ui dropdown item"
+                id="status"
+                value={status}
+                onChange={(event) => setStatus(event.target.value)}
+              >
+                <option>All</option>
+                <option>Available</option>
+                <option>Removed</option>
+              </select>
+            </label>
+          </div>
+
+          <div className="three column row">
+            <label className="six wide column" htmlFor="mls">
+              {" "}
+              Search by MLS
+              <input
+                className=""
+                id="mls"
+                value={mls}
+                placeholder="MLS"
+                onChange={(e) => setMls(e.target.value)}
+              />
+            </label>
+
+            <label className="six wide column" htmlFor="weeks">
+              Weeks
+              <select
+                className=""
+                id="weeks"
+                value={weeks}
+                onChange={(e) => setWeeks(e.target.value)}
+                onBlur={(e) => setWeeks(e.target.value)}
+              >
+                <option>Over</option>
+                {WEEKS.map((weeks) => (
+                  <option key={weeks} value={weeks}>
+                    {weeks}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label className="four wide column">
+              New:
+              <input
+                className="ui checkbox"
+                id=""
+                type="checkbox"
+                value="{checked}"
+                onChange={() => setChecked((checked) => !checked)}
+              />
+            </label>
+          </div>
         </div>
 
-        <h2>Filters</h2>
-        <label className="" htmlFor="bedrooms">
-          Bedrooms
-          <select
-            className=""
-            id="bedrooms"
-            value={bedrooms}
-            onChange={(event) => setBedrooms(event.target.value)}
-          >
-            <option>All</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-          </select>
-        </label>
-
-        <label className="" htmlFor="status">
-          Status
-          <select
-            className=""
-            id="status"
-            value={status}
-            onChange={(event) => setStatus(event.target.value)}
-          >
-            <option>All</option>
-            <option>Available</option>
-            <option>Removed</option>
-          </select>
-        </label>
-
-        <label className="" htmlFor="mls">
-          {" "}
-          Search by MLS
-          <input
-            className=""
-            id="mls"
-            value={mls}
-            placeholder="MLS"
-            onChange={(e) => setMls(e.target.value)}
-          />
-        </label>
-
-        <label className="" htmlFor="weeks">
-          Weeks
-          <select
-            className=""
-            id="weeks"
-            value={weeks}
-            onChange={(e) => setWeeks(e.target.value)}
-            onBlur={(e) => setWeeks(e.target.value)}
-          >
-            <option>Over</option>
-            {WEEKS.map((weeks) => (
-              <option key={weeks} value={weeks}>
-                {weeks}
-              </option>
-            ))}
-          </select>
-        </label>
-
-        <label className="">
-          New:
-          <input
-            className=""
-            id=""
-            type="checkbox"
-            value="{checked}"
-            onChange={() => setChecked((checked) => !checked)}
-          />
-        </label>
-
-        <div className="" id="sliderBox">
-          <Typography id="range-slider" gutterBottom>
-            Select Price Range:
-          </Typography>
-          <Slider
-            value={price}
-            min={0}
-            step={25000}
-            max={600000}
-            onChange={rangeSelector}
-            valueLabelDisplay="auto"
-          />
-          Price is between {price[0]} and {price[1]}
+        <div className="sliderBox">
+          <div>
+            <Typography id="range-slider" gutterBottom>
+              Select Price Range:
+            </Typography>
+            <Slider
+              value={price}
+              min={0}
+              step={25000}
+              max={600000}
+              onChange={rangeSelector}
+              valueLabelDisplay="auto"
+            />
+            Price is between {price[0]} and {price[1]}
+          </div>
         </div>
 
         <input className="ui button" type="submit" value="Submit" />
