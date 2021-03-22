@@ -4,14 +4,14 @@ import Slider from "@material-ui/core/Slider";
 
 import { customMarker } from "./constants";
 import { RedMarker } from "./RedMarker";
-import { Form, Button, Select } from "semantic-ui-react";
+import { Form } from "semantic-ui-react";
 
 const WEEKS = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export default function Filters({ data, PriceData, setMarkers }) {
   const [bedrooms, setBedrooms] = useState("All");
   const [status, setStatus] = useState("All");
-  const [price, setPrice] = useState([0, 600000]);
+  const [price, setPrice] = useState([275000, 425000]);
   const [mls, setMls] = useState("");
   const [weeks, setWeeks] = useState("");
   const [checked, setChecked] = useState(false);
@@ -83,7 +83,7 @@ export default function Filters({ data, PriceData, setMarkers }) {
             <div className="left floated column">
               <h2>Filters</h2>
             </div>
-            <div className="right floated column">
+            <div className="right floated column right aligned">
               <i aria-hidden="true" className="close link icon"></i>
             </div>
           </div>
