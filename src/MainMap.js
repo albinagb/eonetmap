@@ -7,7 +7,7 @@ import { customMarker } from "./constants";
 import { RedMarker } from "./RedMarker";
 
 const position = [45.503, -73.595];
-const mapStyle = { height: "90vh" };
+const mapStyle = { height: "100vh" };
 
 function NewDataArray(data) {
   let dataClean = [];
@@ -47,13 +47,7 @@ const MainMap = ({ data = [] }) => {
   const [markers, setMarkers] = useState(dataClean);
   return (
     <>
-      <Map
-        className="map"
-        center={position}
-        zoom={2}
-        style={mapStyle}
-        maxZoom={18}
-      >
+      <Map center={position} zoom={2} style={mapStyle} maxZoom={18}>
         <Filters
           data={data}
           setMarkers={setMarkers}
