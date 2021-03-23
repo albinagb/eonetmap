@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
-
+import icon from "./images/icon.png";
 import { customMarker } from "./constants";
 import { RedMarker } from "./RedMarker";
 import { Form } from "semantic-ui-react";
@@ -75,11 +75,18 @@ export default function Filters({ data, PriceData, setMarkers }) {
     setMarkers(dataClean);
   };
 
+  // ....
+
   return (
     <>
-      <Form className="greenForm " onSubmit={handleSubmit}>
+      <Form className="form" onSubmit={handleSubmit}>
         <div className="ui grid">
-          <div className="two column row">
+          <div className="three column row">
+            <div className="three wide column">
+              <a href="/">
+                <img src={icon} alt="map search icon" />
+              </a>
+            </div>
             <div className="left floated column">
               <h2>Filters</h2>
             </div>
@@ -92,7 +99,7 @@ export default function Filters({ data, PriceData, setMarkers }) {
             <label className="left floated column" htmlFor="bedrooms">
               Bedrooms
               <select
-                className=""
+                className="ui dropdown"
                 id="bedrooms"
                 value={bedrooms}
                 onChange={(event) => setBedrooms(event.target.value)}
@@ -121,7 +128,7 @@ export default function Filters({ data, PriceData, setMarkers }) {
           </div>
 
           <div className="three column row">
-            <label className="six wide column" htmlFor="mls">
+            <label className="seven wide column" htmlFor="mls">
               {" "}
               Search by MLS
               <input
@@ -133,10 +140,10 @@ export default function Filters({ data, PriceData, setMarkers }) {
               />
             </label>
 
-            <label className="six wide column" htmlFor="weeks">
+            <label className="five wide column" htmlFor="weeks">
               Weeks
               <select
-                className=""
+                className="ui dropdown"
                 id="weeks"
                 value={weeks}
                 onChange={(e) => setWeeks(e.target.value)}
@@ -181,8 +188,13 @@ export default function Filters({ data, PriceData, setMarkers }) {
           </div>
         </div>
 
-        <input className="ui button" type="submit" value="Submit" />
+        <input className="small ui button" type="submit" value="Submit" />
       </Form>
     </>
   );
 }
+
+//
+
+// const draggable = useState(false);
+// draggable={draggable}

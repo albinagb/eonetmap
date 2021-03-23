@@ -41,7 +41,7 @@ i {
   z-index: 2;
 }
 
-.greenForm {
+.form {
   display: block;
   position: absolute;
   background-color: hsla(146, 36%, 33%, 0.8);
