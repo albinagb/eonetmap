@@ -30,7 +30,7 @@ function NewDataArray(data) {
 }
 
 function PriceData(element) {
-  let labelText = `No.: ${element.MlsNumber}, year: ${element.year},  ${element.Bedrooms} rooms, ${element.Parking} parking</br>
+  let labelText = `No.: ${element.MlsNumber}, year ${element.year},  ${element.Bedrooms} rooms, ${element.Parking} parking</br>
   ${element.ListingAddress}</br></br>`;
   const data = element.history;
   data[0].forEach((element, indx) => {
@@ -48,12 +48,6 @@ const MainMap = ({ data = [] }) => {
   return (
     <>
       <Map center={position} zoom={2} style={mapStyle} maxZoom={18}>
-        <Filters
-          data={data}
-          setMarkers={setMarkers}
-          PriceData={PriceData}
-          markers={markers}
-        />
         <TileLayer
           className="test"
           url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
@@ -61,6 +55,12 @@ const MainMap = ({ data = [] }) => {
         />
         <MarkerCluster markers={markers} />
       </Map>
+      <Filters
+        data={data}
+        setMarkers={setMarkers}
+        PriceData={PriceData}
+        markers={markers}
+      />
     </>
   );
 };

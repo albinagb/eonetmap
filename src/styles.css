@@ -1,3 +1,6 @@
+@import "~semantic-ui-css/semantic.css";
+@import "~leaflet/dist/leaflet.css";
+
 *::before,
 *::after {
   box-sizing: border-box;
@@ -12,43 +15,35 @@ html {
   font-weight: 300;
 }
 
-#root {
-  position: relative;
-  z-index: 0;
-  height: 100vh;
-  background-color: yellow;
-}
-
-.leaflet-container {
-  position: relative;
+/* .leaflet-container {
+  position: absolute;
   z-index: 0;
   height: 100vh;
 }
 
 i {
   color: white;
-}
+} */
 
-.leaflet-control-container {
-  position: relative;
+/* .leaflet-control-container {
+  position: absolute;
   z-index: 3;
   margin-left: 25rem;
 }
 
 .leaflet-pane,
 .leaflet-map-pane {
-  position: relative;
+  position: absolute;
   z-index: 2;
-}
+} */
 
 .form {
-  display: block;
-  position: absolute;
   background-color: hsla(146, 36%, 33%, 0.8);
+  border-radius: 0.2rem;
   color: #fff;
-  z-index: 2;
-  width: 25rem;
-  height: 100vh;
+  width: 400px;
+  max-height: calc(100vh);
+  overflow: auto;
   padding: 2rem;
 }
 

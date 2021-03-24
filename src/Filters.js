@@ -4,14 +4,26 @@ import Slider from "@material-ui/core/Slider";
 import icon from "./images/icon.png";
 import { customMarker } from "./constants";
 import { RedMarker } from "./RedMarker";
-import { Form } from "semantic-ui-react";
+import { Form, Segment } from "semantic-ui-react";
+
+// some inline styles (we should move these to our index.css at one stage)
+const segmentStyle = {
+  zIndex: 999,
+  position: "absolute",
+  width: "400px",
+  top: "10px",
+  left: "10px",
+  maxHeight: "calc(100vh - 5vw)",
+  overflow: "auto",
+  padding: "20px",
+};
 
 const WEEKS = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export default function Filters({ data, PriceData, setMarkers }) {
   const [bedrooms, setBedrooms] = useState("All");
   const [status, setStatus] = useState("All");
-  const [price, setPrice] = useState([275000, 425000]);
+  const [price, setPrice] = useState([0, 600000]);
   const [mls, setMls] = useState("");
   const [weeks, setWeeks] = useState("");
   const [checked, setChecked] = useState(false);
@@ -79,117 +91,119 @@ export default function Filters({ data, PriceData, setMarkers }) {
 
   return (
     <>
-      <Form className="form" onSubmit={handleSubmit}>
-        <div className="ui grid">
-          <div className="three column row">
-            <div className="three wide column">
-              <a href="/">
-                <img src={icon} alt="map search icon" />
-              </a>
+      <Segment style={segmentStyle}>
+        <Form className="form" onSubmit={handleSubmit}>
+          <div className="ui grid">
+            <div className="three column row">
+              <div className="three wide column">
+                <a href="/">
+                  <img src={icon} alt="map search icon" />
+                </a>
+              </div>
+              <div className="left floated column">
+                <h2>Filters</h2>
+              </div>
+              <div className="right floated column right aligned">
+                <i aria-hidden="true" className="close link icon"></i>
+              </div>
             </div>
-            <div className="left floated column">
-              <h2>Filters</h2>
+
+            <div className="two column row">
+              <label className="left floated column" htmlFor="bedrooms">
+                Bedrooms
+                <select
+                  className="ui dropdown"
+                  id="bedrooms"
+                  value={bedrooms}
+                  onChange={(event) => setBedrooms(event.target.value)}
+                >
+                  <option>All</option>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                </select>
+              </label>
+
+              <label className="right floated column" htmlFor="status">
+                Status
+                <select
+                  className="ui dropdown item"
+                  id="status"
+                  value={status}
+                  onChange={(event) => setStatus(event.target.value)}
+                >
+                  <option>All</option>
+                  <option>Available</option>
+                  <option>Removed</option>
+                </select>
+              </label>
             </div>
-            <div className="right floated column right aligned">
-              <i aria-hidden="true" className="close link icon"></i>
+
+            <div className="three column row">
+              <label className="seven wide column" htmlFor="mls">
+                {" "}
+                Search by MLS
+                <input
+                  className=""
+                  id="mls"
+                  value={mls}
+                  placeholder="MLS"
+                  onChange={(e) => setMls(e.target.value)}
+                />
+              </label>
+
+              <label className="five wide column" htmlFor="weeks">
+                Weeks
+                <select
+                  className="ui dropdown"
+                  id="weeks"
+                  value={weeks}
+                  onChange={(e) => setWeeks(e.target.value)}
+                  onBlur={(e) => setWeeks(e.target.value)}
+                >
+                  <option>Over</option>
+                  {WEEKS.map((weeks) => (
+                    <option key={weeks} value={weeks}>
+                      {weeks}
+                    </option>
+                  ))}
+                </select>
+              </label>
+
+              <label className="four wide column">
+                New:
+                <input
+                  className="ui checkbox"
+                  id=""
+                  type="checkbox"
+                  value="{checked}"
+                  onChange={() => setChecked((checked) => !checked)}
+                />
+              </label>
             </div>
           </div>
 
-          <div className="two column row">
-            <label className="left floated column" htmlFor="bedrooms">
-              Bedrooms
-              <select
-                className="ui dropdown"
-                id="bedrooms"
-                value={bedrooms}
-                onChange={(event) => setBedrooms(event.target.value)}
-              >
-                <option>All</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-              </select>
-            </label>
-
-            <label className="right floated column" htmlFor="status">
-              Status
-              <select
-                className="ui dropdown item"
-                id="status"
-                value={status}
-                onChange={(event) => setStatus(event.target.value)}
-              >
-                <option>All</option>
-                <option>Available</option>
-                <option>Removed</option>
-              </select>
-            </label>
-          </div>
-
-          <div className="three column row">
-            <label className="seven wide column" htmlFor="mls">
-              {" "}
-              Search by MLS
-              <input
-                className=""
-                id="mls"
-                value={mls}
-                placeholder="MLS"
-                onChange={(e) => setMls(e.target.value)}
+          <div className="sliderBox">
+            <div>
+              <Typography id="range-slider" gutterBottom>
+                Select Price Range:
+              </Typography>
+              <Slider
+                value={price}
+                min={0}
+                step={25000}
+                max={600000}
+                onChange={rangeSelector}
+                valueLabelDisplay="auto"
               />
-            </label>
-
-            <label className="five wide column" htmlFor="weeks">
-              Weeks
-              <select
-                className="ui dropdown"
-                id="weeks"
-                value={weeks}
-                onChange={(e) => setWeeks(e.target.value)}
-                onBlur={(e) => setWeeks(e.target.value)}
-              >
-                <option>Over</option>
-                {WEEKS.map((weeks) => (
-                  <option key={weeks} value={weeks}>
-                    {weeks}
-                  </option>
-                ))}
-              </select>
-            </label>
-
-            <label className="four wide column">
-              New:
-              <input
-                className="ui checkbox"
-                id=""
-                type="checkbox"
-                value="{checked}"
-                onChange={() => setChecked((checked) => !checked)}
-              />
-            </label>
+              Price is between {price[0]} and {price[1]}
+            </div>
           </div>
-        </div>
 
-        <div className="sliderBox">
-          <div>
-            <Typography id="range-slider" gutterBottom>
-              Select Price Range:
-            </Typography>
-            <Slider
-              value={price}
-              min={0}
-              step={25000}
-              max={600000}
-              onChange={rangeSelector}
-              valueLabelDisplay="auto"
-            />
-            Price is between {price[0]} and {price[1]}
-          </div>
-        </div>
-
-        <input className="small ui button" type="submit" value="Submit" />
-      </Form>
+          <input className="small ui button" type="submit" value="Submit" />
+        </Form>
+      </Segment>
     </>
   );
 }
