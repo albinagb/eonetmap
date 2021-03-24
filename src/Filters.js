@@ -9,13 +9,14 @@ import { Form, Segment } from "semantic-ui-react";
 // some inline styles (we should move these to our index.css at one stage)
 const segmentStyle = {
   zIndex: 999,
+  background: "hsla(146, 36%, 33%, 0.7)",
   position: "absolute",
-  width: "400px",
-  top: "10px",
-  left: "10px",
+  width: "350px",
+  top: "30px",
+  left: "50px",
   maxHeight: "calc(100vh - 5vw)",
   overflow: "auto",
-  padding: "20px",
+  padding: "5px",
 };
 
 const WEEKS = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -141,7 +142,7 @@ export default function Filters({ data, PriceData, setMarkers }) {
             </div>
 
             <div className="three column row">
-              <label className="seven wide column" htmlFor="mls">
+              <label className="six wide column" htmlFor="mls">
                 {" "}
                 Search by MLS
                 <input
@@ -153,7 +154,7 @@ export default function Filters({ data, PriceData, setMarkers }) {
                 />
               </label>
 
-              <label className="five wide column" htmlFor="weeks">
+              <label className="six wide column" htmlFor="weeks">
                 Weeks
                 <select
                   className="ui dropdown"

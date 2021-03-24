@@ -38,10 +38,8 @@ i {
 } */
 
 .form {
-  background-color: hsla(146, 36%, 33%, 0.8);
   border-radius: 0.2rem;
   color: #fff;
-  width: 400px;
   max-height: calc(100vh);
   overflow: auto;
   padding: 2rem;
