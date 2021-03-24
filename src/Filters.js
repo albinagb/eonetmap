@@ -154,7 +154,7 @@ export default function Filters({ data, PriceData, setMarkers }) {
                 />
               </label>
 
-              <label className="six wide column" htmlFor="weeks">
+              <label className="six wide column top-1" htmlFor="weeks">
                 Weeks
                 <select
                   className="ui dropdown"
@@ -172,7 +172,7 @@ export default function Filters({ data, PriceData, setMarkers }) {
                 </select>
               </label>
 
-              <label className="four wide column">
+              <label className="four wide column top-2">
                 New:
                 <input
                   className="ui checkbox"
