@@ -21,7 +21,10 @@ const GlobalCss = withStyles({
     },
     ".PrivateValueLabel-label-5": {
       color: "#367250",
-      fontSize: "0.1rem",
+      fontSize: "9px",
+    },
+    ".ui.form select": {
+      color: "#367250",
     },
   },
 })(() => null);
@@ -38,6 +41,8 @@ const segmentStyle = {
   overflow: "auto",
   padding: "5px",
 };
+
+// css ends here
 
 const WEEKS = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
@@ -112,6 +117,7 @@ export default function Filters({ data, PriceData, setMarkers }) {
 
   return (
     <>
+      <GlobalCss />
       <Segment style={segmentStyle}>
         <Form className="form" onSubmit={handleSubmit}>
           <div className="ui grid">
@@ -208,7 +214,6 @@ export default function Filters({ data, PriceData, setMarkers }) {
 
           <div className="sliderBox">
             <div>
-              <GlobalCss />
               <Typography id="range-slider" gutterBottom>
                 Select Price Range:
               </Typography>
@@ -224,7 +229,9 @@ export default function Filters({ data, PriceData, setMarkers }) {
             </div>
           </div>
 
-          <input className="small ui button" type="submit" value="Submit" />
+          <button id="button" type="submit" value="Submit">
+            Submit
+          </button>
         </Form>
       </Segment>
     </>

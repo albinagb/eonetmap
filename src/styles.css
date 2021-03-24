@@ -81,3 +81,30 @@ html {
 .MuiSlider-root {
   color: white;
 }
+
+#button {
+  color: #367250;
+  cursor: pointer;
+  min-height: 1rem;
+  outline: 0;
+  border: none;
+  background: #e0e1e2;
+  margin-top: 1.5rem;
+  padding: 0.8rem 1.3rem;
+  text-shadow: none;
+  font-weight: 600;
+  line-height: 0.6rem;
+  font-style: normal;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 0.28571429rem;
+  box-shadow: 0 0 0 1px transparent inset, 0 0 0 0 rgba(34, 36, 38, 0.15) inset;
+  transition: opacity 0.1s ease, background-color 0.1s ease, color 0.1s ease,
+    box-shadow 0.1s ease, background 0.1s ease;
+  float: right;
+}
+
+#button:hover {
+  color: #4d966d;
+  background: white;
+}
