@@ -1,10 +1,30 @@
 import React, { useState } from "react";
 import Typography from "@material-ui/core/Typography";
-import Slider from "@material-ui/core/Slider";
 import icon from "./images/icon.png";
 import { customMarker } from "./constants";
 import { RedMarker } from "./RedMarker";
 import { Form, Segment } from "semantic-ui-react";
+import { withStyles } from "@material-ui/core/styles";
+import Slider from "@material-ui/core/Slider";
+
+// Material UI CSS
+
+const GlobalCss = withStyles({
+  // @global is handled by jss-plugin-global.
+  "@global": {
+    // You should target [class*="MuiButton-root"] instead if you nest themes.
+    ".MuiSlider-thumb": {
+      color: "white",
+    },
+    ".MuiSlider-root": {
+      color: "white",
+    },
+    ".PrivateValueLabel-label-5": {
+      color: "#367250",
+      fontSize: "0.1rem",
+    },
+  },
+})(() => null);
 
 // some inline styles (we should move these to our index.css at one stage)
 const segmentStyle = {
@@ -95,10 +115,10 @@ export default function Filters({ data, PriceData, setMarkers }) {
       <Segment style={segmentStyle}>
         <Form className="form" onSubmit={handleSubmit}>
           <div className="ui grid">
-            <div className="three column row">
+            <div className="three column row ">
               <div className="three wide column">
                 <a href="/">
-                  <img src={icon} alt="map search icon" />
+                  <img src={icon} id="icon" alt="map search icon" />
                 </a>
               </div>
               <div className="left floated column">
@@ -113,7 +133,7 @@ export default function Filters({ data, PriceData, setMarkers }) {
               <label className="left floated column" htmlFor="bedrooms">
                 Bedrooms
                 <select
-                  className="ui dropdown"
+                  className="ui dropdown mr-top"
                   id="bedrooms"
                   value={bedrooms}
                   onChange={(event) => setBedrooms(event.target.value)}
@@ -129,7 +149,7 @@ export default function Filters({ data, PriceData, setMarkers }) {
               <label className="right floated column" htmlFor="status">
                 Status
                 <select
-                  className="ui dropdown item"
+                  className="ui dropdown item mr-top"
                   id="status"
                   value={status}
                   onChange={(event) => setStatus(event.target.value)}
@@ -142,8 +162,7 @@ export default function Filters({ data, PriceData, setMarkers }) {
             </div>
 
             <div className="three column row">
-              <label className="six wide column" htmlFor="mls">
-                {" "}
+              <label className="eight wide column mr-top" htmlFor="mls">
                 Search by MLS
                 <input
                   className=""
@@ -154,10 +173,10 @@ export default function Filters({ data, PriceData, setMarkers }) {
                 />
               </label>
 
-              <label className="six wide column top-1" htmlFor="weeks">
+              <label className="six wide column" htmlFor="weeks">
                 Weeks
                 <select
-                  className="ui dropdown"
+                  className="ui dropdown mr-top"
                   id="weeks"
                   value={weeks}
                   onChange={(e) => setWeeks(e.target.value)}
@@ -171,22 +190,25 @@ export default function Filters({ data, PriceData, setMarkers }) {
                   ))}
                 </select>
               </label>
-
-              <label className="four wide column top-2">
-                New:
-                <input
-                  className="ui checkbox"
-                  id=""
-                  type="checkbox"
-                  value="{checked}"
-                  onChange={() => setChecked((checked) => !checked)}
-                />
-              </label>
             </div>
+          </div>
+
+          <div id="chxContainer">
+            <p id="chxName">New:</p>
+            <label className="checkbox four wide column">
+              <input
+                className="ui checkbox"
+                id=""
+                type="checkbox"
+                value="{checked}"
+                onChange={() => setChecked((checked) => !checked)}
+              />
+            </label>
           </div>
 
           <div className="sliderBox">
             <div>
+              <GlobalCss />
               <Typography id="range-slider" gutterBottom>
                 Select Price Range:
               </Typography>
