@@ -32,8 +32,9 @@ function NewDataArray(data) {
 function PriceData(element) {
   let labelText = `No.: <a target="blank" href="${element.url}">${
     element.MlsNumber
-  }</a>: ${element.Bedrooms} rooms, ${element.Parking} parking${(element.year =
-    element.year === 0 ? "" : `, year ` + element.year)}</br></br>
+  }</a>: ${element.Bedrooms} rooms, ${element.Parking} parking${
+    element.year === 0 ? "" : `, year ` + element.year
+  }</br></br>
   ${element.ListingAddress}</br></br>`;
   const data = element.history;
   data[0].forEach((element, indx) => {

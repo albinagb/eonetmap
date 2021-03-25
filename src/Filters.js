@@ -27,7 +27,7 @@ const GlobalCss = withStyles({
       color: "#367250",
     },
     ".ui.checkbox": {
-      margin: "0.1rem 0 0 0",
+      margin: "0.21rem 0 0 0",
       width: "5rem",
     },
   },
