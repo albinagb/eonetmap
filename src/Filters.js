@@ -34,11 +34,12 @@ const segmentStyle = {
   zIndex: 999,
   background: "hsla(146, 36%, 33%, 0.7)",
   position: "absolute",
-  width: "350px",
+  width: "360px",
   top: "30px",
   left: "50px",
   maxHeight: "calc(100vh - 5vw)",
   overflow: "auto",
+  marginTop: "4px",
   padding: "5px",
 };
 
@@ -56,11 +57,9 @@ export default function Filters({ data, PriceData, setMarkers }) {
 
   const rangeSelector = (e, newValue) => {
     setPrice(newValue);
-    // console.log(`Value 1: ${newValue[0]} ---  Value 2: ${newValue[1]}`)
   };
 
   // Object keys
-
   // let propertyDataKeys = Object.keys(data[0]).map((el) => {
   //   console.log(el);
   // });
@@ -71,10 +70,6 @@ export default function Filters({ data, PriceData, setMarkers }) {
 
   if (mls !== "") {
     data = data.filter((el) => el.MlsNumber == mls);
-  }
-
-  if (weeks !== "Over") {
-    data = data.filter((item) => item.weeks_on_market >= weeks);
   }
 
   if (bedrooms !== "All") {
@@ -167,9 +162,28 @@ export default function Filters({ data, PriceData, setMarkers }) {
               </label>
             </div>
 
+            <div className="sliderBox">
+              <div>
+                <Typography id="range-slider" gutterBottom>
+                  Select Price Range:
+                </Typography>
+                <Slider
+                  value={price}
+                  min={0}
+                  step={25000}
+                  max={600000}
+                  onChange={rangeSelector}
+                  valueLabelDisplay="auto"
+                />
+                <p id="thirdPf">
+                  Price is between {price[0]} and {price[1]}{" "}
+                </p>
+              </div>
+            </div>
+
             <div className="three column row">
-              <label className="eight wide column mr-top" htmlFor="mls">
-                Search by MLS
+              <label className="eight wide column" htmlFor="mls">
+                <p id="secondPf">Search by MLS</p>
                 <input
                   className=""
                   id="mls"
@@ -179,55 +193,38 @@ export default function Filters({ data, PriceData, setMarkers }) {
                 />
               </label>
 
-              <label className="six wide column" htmlFor="weeks">
-                Weeks
-                <select
-                  className="ui dropdown mr-top"
-                  id="weeks"
-                  value={weeks}
-                  onChange={(e) => setWeeks(e.target.value)}
-                  onBlur={(e) => setWeeks(e.target.value)}
-                >
-                  <option>Over</option>
-                  {WEEKS.map((weeks) => (
-                    <option key={weeks} value={weeks}>
-                      {weeks}
-                    </option>
-                  ))}
-                </select>
-              </label>
+              <div id="chxContainer">
+                <p id="chxName">New:</p>
+                <label className="checkbox four wide column">
+                  <input
+                    className="ui checkbox"
+                    id=""
+                    type="checkbox"
+                    value="{checked}"
+                    onChange={() => setChecked((checked) => !checked)}
+                  />
+                </label>
+              </div>
             </div>
           </div>
 
-          <div id="chxContainer">
-            <p id="chxName">New:</p>
-            <label className="checkbox four wide column">
-              <input
-                className="ui checkbox"
-                id=""
-                type="checkbox"
-                value="{checked}"
-                onChange={() => setChecked((checked) => !checked)}
-              />
-            </label>
-          </div>
-
-          <div className="sliderBox">
-            <div>
-              <Typography id="range-slider" gutterBottom>
-                Select Price Range:
-              </Typography>
-              <Slider
-                value={price}
-                min={0}
-                step={25000}
-                max={600000}
-                onChange={rangeSelector}
-                valueLabelDisplay="auto"
-              />
-              Price is between {price[0]} and {price[1]}
-            </div>
-          </div>
+          <label htmlFor="weeks">
+            <p id="weeks"> Weeks</p>
+            <select
+              className="ui dropdown mr-top"
+              id="weeks"
+              value={weeks}
+              onChange={(e) => setWeeks(e.target.value)}
+              onBlur={(e) => setWeeks(e.target.value)}
+            >
+              <option>Over</option>
+              {WEEKS.map((weeks) => (
+                <option key={weeks} value={weeks}>
+                  {weeks}
+                </option>
+              ))}
+            </select>
+          </label>
 
           <button id="button" type="submit" value="Submit">
             Submit

@@ -12,30 +12,35 @@ html {
   font-weight: 300;
 }
 
-/* .leaflet-container {
-  position: absolute;
-  z-index: 0;
-  height: 100vh;
+p:first-child {
+  margin: -1rem 0 0.6rem -0.8rem;
+  font-family: "Avenir", "Helvetica", sans-serif;
+  font-weight: 300;
 }
 
-/* .leaflet-control-container {
-  position: absolute;
-  z-index: 3;
-  margin-left: 25rem;
+#secondPf {
+  margin: 0 0 0.6rem 0.1rem;
 }
 
-.leaflet-pane,
-.leaflet-map-pane {
+#thirdPf {
+  margin: 0.3rem 0 0 -0.9rem;
+}
+
+#weeks {
+  margin: 1rem 0 -0.5rem 0;
+}
+
+.leaflet-control-container {
   position: absolute;
-  z-index: 2;
-} */
+  margin-left: 0rem;
+}
 
 .form {
   border-radius: 0.2rem;
   color: #fff;
   max-height: calc(100vh);
   overflow: auto;
-  padding: 2rem;
+  padding: 1.5rem;
 }
 
 .big-cx {
@@ -45,11 +50,10 @@ html {
 }
 
 .sliderBox {
-  background-color: hsla(146, 36%, 33%, 0.6);
-  margin: 1rem 0;
-  padding: 1rem 2rem;
-  border-radius: 1rem;
-  width: fit-content;
+  margin: 0.7rem 0 0 0.9rem;
+  padding: 1rem 1.5rem;
+  border-radius: 0.5rem;
+  width: 19rem;
 }
 
 .mr-top {
@@ -60,6 +64,7 @@ html {
   width: 2.5rem;
 }
 
+/* below checkbox styles => */
 .checkbox {
   width: 7rem;
   margin-top: 1.1rem;
@@ -74,6 +79,8 @@ html {
   margin-top: 1rem;
 }
 
+/* <= checkbox styles end */
+
 .MuiSlider-thumb {
   background-color: white;
 }
@@ -83,12 +90,12 @@ html {
 }
 
 #button {
-  color: #367250;
+  color: #4d966d;
   cursor: pointer;
   min-height: 1rem;
   outline: 0;
   border: none;
-  background: #e0e1e2;
+  background: white;
   margin-top: 1.5rem;
   padding: 0.8rem 1.3rem;
   text-shadow: none;
@@ -105,6 +112,6 @@ html {
 }
 
 #button:hover {
-  color: #4d966d;
-  background: white;
+  color: #367250;
+  background: #e0e1e2;
 }
