@@ -26,6 +26,10 @@ const GlobalCss = withStyles({
     ".ui.form select": {
       color: "#367250",
     },
+    ".ui.checkbox": {
+      margin: "1.1rem 0 0 0.5rem",
+      width: "5rem",
+    },
   },
 })(() => null);
 
@@ -162,6 +166,8 @@ export default function Filters({ data, PriceData, setMarkers }) {
               </label>
             </div>
 
+            <div class="ui inverted divider"></div>
+
             <div className="sliderBox">
               <div>
                 <Typography id="range-slider" gutterBottom>
@@ -234,8 +240,3 @@ export default function Filters({ data, PriceData, setMarkers }) {
     </>
   );
 }
-
-//
-
-// const draggable = useState(false);
-// draggable={draggable}
