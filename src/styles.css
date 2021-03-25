@@ -75,11 +75,6 @@ p:first-child {
   margin: 2.2rem 0rem 0 2rem;
 }
 
-#chxName {
-  position: absolute;
-  margin-top: 1rem;
-}
-
 /* <= checkbox styles end */
 
 .MuiSlider-thumb {

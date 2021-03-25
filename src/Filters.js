@@ -27,7 +27,7 @@ const GlobalCss = withStyles({
       color: "#367250",
     },
     ".ui.checkbox": {
-      margin: "1.1rem 0 0 0.5rem",
+      margin: "0.1rem 0 0 0",
       width: "5rem",
     },
   },
@@ -200,11 +200,10 @@ export default function Filters({ data, PriceData, setMarkers }) {
               </label>
 
               <div id="chxContainer">
-                <p id="chxName">New:</p>
-                <label className="checkbox four wide column">
+                New:
+                <label className="four wide column">
                   <input
                     className="ui checkbox"
-                    id=""
                     type="checkbox"
                     value="{checked}"
                     onChange={() => setChecked((checked) => !checked)}
