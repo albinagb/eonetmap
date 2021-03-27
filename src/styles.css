@@ -1,3 +1,9 @@
+:root {
+  --select-border: #fff;
+  --select-focus: var(--select-border);
+  --select-arrow: var(--select-border);
+}
+
 *::before,
 *::after {
   box-sizing: border-box;
@@ -29,7 +35,7 @@ p:first-child {
 }
 
 #weeks {
-  margin: 1rem 0 -0.5rem 0;
+  margin: -0.5rem 1rem 1rem 0;
   width: 8.5rem;
 }
 
@@ -92,11 +98,11 @@ p:first-child {
   outline: 0;
   border: none;
   background: white;
-  margin-top: 1.5rem;
+  margin-top: 0;
   padding: 0.8rem 1.3rem;
   text-shadow: none;
-  font-weight: 600;
-  line-height: 0.6rem;
+  font-weight: 500;
+  line-height: 0.5rem;
   font-style: normal;
   text-align: center;
   text-decoration: none;
@@ -114,4 +120,59 @@ p:first-child {
 
 #mls {
   padding: 0.55rem 1rem;
+}
+
+select {
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  padding: 0 1em 0 0;
+  margin: 0;
+  width: 100%;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: inherit;
+  line-height: inherit;
+  outline: none;
+}
+
+/* .select {
+}
+
+.select::after {
+  content: "";
+  width: 0.8em;
+  height: 0.5em;
+  background-color: #367250;
+  background-color: black;
+  clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+}
+
+select,
+.select:after {
+} */
+
+#searchIconBox {
+  z-index: 999;
+  background: hsla(146, 36%, 33%, 0.7);
+  border-radius: 6px;
+  position: absolute;
+  width: 5.2rem;
+  height: 5rem;
+  top: 30px;
+  left: 50px;
+  margin-top: 4px;
+  padding: 5px;
+  box-shadow: 0 0 0 3px transparent, 0 0 0 0 rgba(34, 36, 38, 0.15);
+  visibility: hidden;
+}
+
+#iconInBox {
+  width: 3.2rem;
+  margin: 0.7rem 0.4rem 0.6rem 0.8rem;
+}
+
+.form-btn {
+  cursor: pointer;
+  transition: all 0.5s ease-out;
 }

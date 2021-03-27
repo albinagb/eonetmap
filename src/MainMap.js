@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { Map, TileLayer } from "react-leaflet";
-import Filters from "./Filters";
-import MarkerCluster from "./MarkerCluster";
-
-import { customMarker } from "./constants";
-import { RedMarker } from "./RedMarker";
+import Filters from "./components/Filters";
+import MarkerCluster from "./components/MarkerCluster";
+import { customMarker } from "./components/constants";
+import { RedMarker } from "./components/RedMarker";
 
 const position = [45.503, -73.595];
 const mapStyle = { height: "100vh" };
