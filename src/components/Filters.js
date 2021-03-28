@@ -53,7 +53,7 @@ const segmentStyle = {
 const WEEKS = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 const BEDROOMS = [1, 2, 3, 4];
 
-export default function Filters({ data, PriceData, setMarkers, styleBtn }) {
+export default function Filters({ data, PriceData, setMarkers }) {
   const [bedrooms, setBedrooms] = useState("All");
   const [status, setStatus] = useState("All");
   const [price, setPrice] = useState([0, 600000]);
@@ -101,19 +101,17 @@ export default function Filters({ data, PriceData, setMarkers, styleBtn }) {
     data = data.filter((item) => item.weeks_on_market >= weeks);
   }
 
-  //   if (year !== "All") {
-  //     data = data.filter(
-  //       (item) => {
-  //       if (year === "2005 or after") {
-  //         item.year >= 2005;
-  //       } else if (year === "2015 or after") {
-  //         item.year >= 2015;
-  //       } else if (year === "uknown") {
-  //         item.year === 0;
-  //       }
-
-  //     }
-  // }
+  if (year !== "All") {
+    if (year === "2005 or after") {
+      data = data.filter((item) => item.year >= 2005);
+    }
+    if (year === "2015 or after") {
+      data = data.filter((item) => item.year >= 2015);
+    }
+    if (year === "unknown year") {
+      data = data.filter((item) => item.year === 0);
+    }
+  }
 
   // Status
 
@@ -148,7 +146,6 @@ export default function Filters({ data, PriceData, setMarkers, styleBtn }) {
       {/* {isOpen
         ? (styleBtn = { visibility: "hidden" })
         : (styleBtn = { visibility: "visible" })} */}
-      console.log({styleBtn});
       <div
         style={isOpen ? { visibility: "hidden" } : { visibility: "visible" }}
       >
