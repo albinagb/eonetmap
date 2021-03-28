@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useReducer } from "react";
 import { Map, TileLayer } from "react-leaflet";
 import Filters from "./components/Filters";
 import MarkerCluster from "./components/MarkerCluster";
 import { customMarker } from "./components/constants";
 import { RedMarker } from "./components/RedMarker";
+import FormMainBtn from "./components/FormMainBtn";
 
 const position = [45.503, -73.595];
 const mapStyle = { height: "100vh" };
@@ -48,6 +49,7 @@ function PriceData(element) {
 const MainMap = ({ data = [] }) => {
   let dataClean = NewDataArray(data);
   const [markers, setMarkers] = useState(dataClean);
+
   return (
     <>
       <Map center={position} zoom={2} style={mapStyle} maxZoom={18}>
@@ -64,6 +66,8 @@ const MainMap = ({ data = [] }) => {
         PriceData={PriceData}
         markers={markers}
       />
+
+      <FormMainBtn styleBtn={{ visibility: "visible" }} />
     </>
   );
 };

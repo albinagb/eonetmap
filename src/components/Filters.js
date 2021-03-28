@@ -6,7 +6,7 @@ import { RedMarker } from "./RedMarker";
 import { Form, Segment } from "semantic-ui-react";
 import { withStyles } from "@material-ui/core/styles";
 import Slider from "@material-ui/core/Slider";
-import FormMainBtn from "./FormMainBtn";
+import useToggle from "./useToggle";
 
 // Material UI CSS
 
@@ -51,14 +51,20 @@ const segmentStyle = {
 // css ends here
 
 const WEEKS = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const BEDROOMS = [1, 2, 3, 4];
 
-export default function Filters({ data, PriceData, setMarkers }) {
+export default function Filters({ data, PriceData, setMarkers, styleBtn }) {
   const [bedrooms, setBedrooms] = useState("All");
   const [status, setStatus] = useState("All");
   const [price, setPrice] = useState([0, 600000]);
   const [mls, setMls] = useState("");
   const [weeks, setWeeks] = useState("");
   const [checked, setChecked] = useState(false);
+  const [year, setYear] = useState("All");
+
+  // btn toggle function
+
+  const [isOpen, setIsOpen] = useToggle();
 
   const rangeSelector = (e, newValue) => {
     setPrice(newValue);
@@ -68,6 +74,8 @@ export default function Filters({ data, PriceData, setMarkers }) {
   // let propertyDataKeys = Object.keys(data[0]).map((el) => {
   //   console.log(el);
   // });
+
+  // Filters
 
   data = data.filter(
     (item) => item.Price >= price[0] && item.Price <= price[1]
@@ -88,6 +96,26 @@ export default function Filters({ data, PriceData, setMarkers }) {
   if (checked) {
     data = data.filter((el) => el.weeks_on_market == 0);
   }
+
+  if (weeks !== "Over") {
+    data = data.filter((item) => item.weeks_on_market >= weeks);
+  }
+
+  //   if (year !== "All") {
+  //     data = data.filter(
+  //       (item) => {
+  //       if (year === "2005 or after") {
+  //         item.year >= 2005;
+  //       } else if (year === "2015 or after") {
+  //         item.year >= 2015;
+  //       } else if (year === "uknown") {
+  //         item.year === 0;
+  //       }
+
+  //     }
+  // }
+
+  // Status
 
   let dataClean = [];
 
@@ -117,132 +145,166 @@ export default function Filters({ data, PriceData, setMarkers }) {
 
   return (
     <>
-      <FormMainBtn />
-      <GlobalCss />
-      <Segment className="searchForm" style={segmentStyle}>
-        <Form className="form" onSubmit={handleSubmit}>
-          <div className="ui grid">
-            <div className="three column row ">
-              <div className="three wide column">
-                <div className="form-btn">
-                  <img src={icon} id="icon" alt="map search icon" />
+      {/* {isOpen
+        ? (styleBtn = { visibility: "hidden" })
+        : (styleBtn = { visibility: "visible" })} */}
+      console.log({styleBtn});
+      <div
+        style={isOpen ? { visibility: "hidden" } : { visibility: "visible" }}
+      >
+        <GlobalCss />
+        <Segment className="searchForm" style={segmentStyle}>
+          <Form className="form" onSubmit={handleSubmit}>
+            <div className="ui grid">
+              <div className="three column row ">
+                <div className="three wide column">
+                  <div className="form-btn">
+                    <img src={icon} id="icon" alt="map search icon" />
+                  </div>
+                </div>
+                <div className="left floated column">
+                  <h2>Filters</h2>
+                </div>
+                <div
+                  className="form-btn right floated column right aligned"
+                  style={
+                    isOpen
+                      ? { visibility: "visible" }
+                      : { visibility: "visible" }
+                  }
+                >
+                  <i
+                    aria-hidden="true"
+                    className="close link icon"
+                    onClick={setIsOpen}
+                  ></i>
                 </div>
               </div>
-              <div className="left floated column">
-                <h2>Filters</h2>
-              </div>
-              <div className="form-btn right floated column right aligned">
-                <i aria-hidden="true" className="close link icon"></i>
-              </div>
-            </div>
 
-            <div className="two column row">
-              <label className="select left floated column" htmlFor="bedrooms">
-                Bedrooms
-                <select
-                  className="mr-top"
-                  id="bedrooms"
-                  value={bedrooms}
-                  onChange={(event) => setBedrooms(event.target.value)}
-                >
-                  <option>All</option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                </select>
-              </label>
+              <div className="three column row">
+                <label className="select six wide column" htmlFor="status">
+                  Status
+                  <select
+                    className="item mr-top"
+                    id="status"
+                    value={status}
+                    onChange={(event) => setStatus(event.target.value)}
+                  >
+                    <option>All</option>
+                    <option>Available</option>
+                    <option>Removed</option>
+                  </select>
+                </label>
 
-              <label className="select right floated column" htmlFor="status">
-                Status
-                <select
-                  className="item mr-top"
-                  id="status"
-                  value={status}
-                  onChange={(event) => setStatus(event.target.value)}
-                >
-                  <option>All</option>
-                  <option>Available</option>
-                  <option>Removed</option>
-                </select>
-              </label>
-            </div>
+                <label className="select five wide column" htmlFor="bedrooms">
+                  Bedrooms
+                  <select
+                    className="mr-top"
+                    id="bedrooms"
+                    value={bedrooms}
+                    onChange={(event) => setBedrooms(event.target.value)}
+                  >
+                    <option>All</option>
+                    {BEDROOMS.map((bedrooms) => (
+                      <option key={bedrooms} value={bedrooms}>
+                        {bedrooms}
+                      </option>
+                    ))}
+                  </select>
+                </label>
 
-            <div class="ui inverted divider"></div>
-
-            <div className="sliderBox">
-              <div>
-                <Typography id="range-slider" gutterBottom>
-                  Select Price Range:
-                </Typography>
-                <Slider
-                  value={price}
-                  min={0}
-                  step={25000}
-                  max={600000}
-                  onChange={rangeSelector}
-                  valueLabelDisplay="auto"
-                />
-                <p id="thirdPf">
-                  Price is between {price[0]} and {price[1]}{" "}
-                </p>
-              </div>
-            </div>
-
-            <div className="three column row">
-              <label className="eight wide column" htmlFor="mls">
-                <p id="secondPf">Search by MLS</p>
-                <input
-                  className=""
-                  id="mls"
-                  value={mls}
-                  placeholder="MLS"
-                  onChange={(e) => setMls(e.target.value)}
-                />
-              </label>
-
-              <div id="chxContainer">
-                New:
-                <label className="four wide column">
-                  <input
-                    className="ui checkbox"
-                    type="checkbox"
-                    value="{checked}"
-                    onChange={() => setChecked((checked) => !checked)}
-                  />
+                <label className="select five wide column" htmlFor="status">
+                  Year
+                  <select
+                    className="item mr-top"
+                    id="year"
+                    value={year}
+                    onChange={(event) => setYear(event.target.value)}
+                  >
+                    <option>All</option>
+                    <option>2005 or after</option>
+                    <option>2015 or after</option>
+                    <option>unknown year</option>
+                  </select>
                 </label>
               </div>
+
+              <div className="ui inverted divider"></div>
+
+              <div className="sliderBox">
+                <div>
+                  <Typography id="range-slider" gutterBottom>
+                    Select Price Range:
+                  </Typography>
+                  <Slider
+                    value={price}
+                    min={0}
+                    step={25000}
+                    max={600000}
+                    onChange={rangeSelector}
+                    valueLabelDisplay="auto"
+                  />
+                  <p id="thirdPf">
+                    Price is between {price[0]} and {price[1]}{" "}
+                  </p>
+                </div>
+              </div>
+
+              <div className="three column row">
+                <label className="eight wide column" htmlFor="mls">
+                  <p id="secondPf">Search by ID_</p>
+                  <input
+                    className=""
+                    id="mls"
+                    value={mls}
+                    placeholder="ID_"
+                    onChange={(e) => setMls(e.target.value)}
+                  />
+                </label>
+
+                <div id="chxContainer">
+                  New:
+                  <label className="four wide column">
+                    <input
+                      className="ui checkbox"
+                      type="checkbox"
+                      value="{checked}"
+                      onChange={() => setChecked((checked) => !checked)}
+                    />
+                  </label>
+                </div>
+              </div>
+
+              <div className="ui inverted divider"></div>
+
+              <div className="two column row">
+                <label className="select left floated column" htmlFor="weeks">
+                  <p id="weeks"> Weeks</p>
+                  <select
+                    className="mr-top"
+                    id="weeks"
+                    value={weeks}
+                    onChange={(e) => setWeeks(e.target.value)}
+                    onBlur={(e) => setWeeks(e.target.value)}
+                  >
+                    <option>Over</option>
+                    {WEEKS.map((weeks) => (
+                      <option key={weeks} value={weeks}>
+                        {weeks}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <div className="right floated column"></div>
+              </div>
             </div>
 
-            <div class="ui inverted divider"></div>
-
-            <div className="two column row">
-              <label className="select left floated column" htmlFor="weeks">
-                <p id="weeks"> Weeks</p>
-                <select
-                  className="mr-top"
-                  id="weeks"
-                  value={weeks}
-                  onChange={(e) => setWeeks(e.target.value)}
-                  onBlur={(e) => setWeeks(e.target.value)}
-                >
-                  <option>Over</option>
-                  {WEEKS.map((weeks) => (
-                    <option key={weeks} value={weeks}>
-                      {weeks}
-                    </option>
-                  ))}
-                </select>
-              </label>
-              <div className="right floated column"></div>
-            </div>
-          </div>
-
-          <button id="button" type="submit" value="Submit">
-            Submit
-          </button>
-        </Form>
-      </Segment>
+            <button id="button" type="submit" value="Submit">
+              Submit
+            </button>
+          </Form>
+        </Segment>
+      </div>
     </>
   );
 }

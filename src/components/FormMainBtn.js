@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import icon from "./images/icon.png";
 
-export default function FormMainBtn() {
-  const [isOpen, setIsOpen] = useState(false);
+export default function FormMainBtn({ styleBtn }) {
   return (
-    <div id="searchIconBox" onClick={() => setIsOpen(!isOpen)}>
+    <div id="searchIconBox" style={styleBtn}>
       <div className="form-btn">
         <img src={icon} id="iconInBox" alt="map search icon" />
       </div>
