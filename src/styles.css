@@ -1,9 +1,3 @@
-:root {
-  --select-border: #fff;
-  --select-focus: var(--select-border);
-  --select-arrow: var(--select-border);
-}
-
 *::before,
 *::after {
   box-sizing: border-box;
@@ -122,52 +116,22 @@ p:first-child {
   padding: 0.55rem 1rem;
 }
 
-select {
-  appearance: none;
-  background-color: transparent;
-  border: none;
-  padding: 0 1em 0 0;
-  margin: 0;
-  width: 100%;
-  font-family: inherit;
-  font-size: inherit;
-  cursor: inherit;
-  line-height: inherit;
-  outline: none;
-}
-
-/* .select {
-}
-
-.select::after {
-  content: "";
-  width: 0.8em;
-  height: 0.5em;
-  background-color: #367250;
-  background-color: black;
-  clip-path: polygon(100% 0%, 0 0%, 50% 100%);
-}
-
-select,
-.select:after {
-} */
-
 #searchIconBox {
-  z-index: 999;
+  z-index: 400;
   background: hsla(146, 36%, 33%, 0.7);
   border-radius: 6px;
   position: absolute;
-  width: 5.2rem;
-  height: 5rem;
-  top: 30px;
-  left: 50px;
+  width: 4rem;
+  height: 4rem;
+  top: 45px;
+  left: 65px;
   margin-top: 4px;
   padding: 5px;
   box-shadow: 0 0 0 3px transparent, 0 0 0 0 rgba(34, 36, 38, 0.15);
 }
 
 #iconInBox {
-  width: 3.2rem;
+  width: 3rem;
   margin: 0.7rem 0.4rem 0.6rem 0.8rem;
 }
 

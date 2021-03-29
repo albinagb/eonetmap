@@ -4,7 +4,6 @@ import Filters from "./components/Filters";
 import MarkerCluster from "./components/MarkerCluster";
 import { customMarker } from "./components/constants";
 import { RedMarker } from "./components/RedMarker";
-import FormMainBtn from "./components/FormMainBtn";
 
 const position = [45.503, -73.595];
 const mapStyle = { height: "100vh" };
@@ -66,8 +65,6 @@ const MainMap = ({ data = [] }) => {
         PriceData={PriceData}
         markers={markers}
       />
-
-      <FormMainBtn styleBtn={{ visibility: "visible" }} />
     </>
   );
 };

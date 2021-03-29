@@ -22,9 +22,6 @@ const MarkerCluster = ({ markers }) => {
         .bindPopup(text)
     );
 
-    // optionally center the map around the markers
-    // map.fitBounds(mcg.getBounds());
-    // // add the marker cluster group to the map
     map.addLayer(mcg);
   }, [markers, map]);
 
@@ -41,3 +38,7 @@ MarkerCluster.propTypes = {
 };
 
 export default MarkerCluster;
+
+// optionally center the map around the markers
+// map.fitBounds(mcg.getBounds());
+// // add the marker cluster group to the map

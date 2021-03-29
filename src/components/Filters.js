@@ -7,9 +7,9 @@ import { Form, Segment } from "semantic-ui-react";
 import { withStyles } from "@material-ui/core/styles";
 import Slider from "@material-ui/core/Slider";
 import useToggle from "./useToggle";
+import FormMainBtn from "./FormMainBtn";
 
 // Material UI CSS
-
 const GlobalCss = withStyles({
   // @global is handled by jss-plugin-global.
   "@global": {
@@ -43,7 +43,6 @@ const segmentStyle = {
   top: "30px",
   left: "50px",
   maxHeight: "calc(100vh - 3vw)",
-  overflow: "auto",
   marginTop: "4px",
   padding: "5px",
 };
@@ -66,6 +65,8 @@ export default function Filters({ data, PriceData, setMarkers }) {
 
   const [isOpen, setIsOpen] = useToggle();
 
+  // ...
+
   const rangeSelector = (e, newValue) => {
     setPrice(newValue);
   };
@@ -76,7 +77,6 @@ export default function Filters({ data, PriceData, setMarkers }) {
   // });
 
   // Filters
-
   data = data.filter(
     (item) => item.Price >= price[0] && item.Price <= price[1]
   );
@@ -108,7 +108,7 @@ export default function Filters({ data, PriceData, setMarkers }) {
     if (year === "2015 or after") {
       data = data.filter((item) => item.year >= 2015);
     }
-    if (year === "unknown year") {
+    if (year === "uknown") {
       data = data.filter((item) => item.year === 0);
     }
   }
@@ -139,24 +139,35 @@ export default function Filters({ data, PriceData, setMarkers }) {
     setMarkers(dataClean);
   };
 
+  const newStyle = isOpen
+    ? { visibility: "hidden" }
+    : { visibility: "visible" };
+
   // ....
 
   return (
     <>
-      {/* {isOpen
-        ? (styleBtn = { visibility: "hidden" })
-        : (styleBtn = { visibility: "visible" })} */}
-      <div
-        style={isOpen ? { visibility: "hidden" } : { visibility: "visible" }}
-      >
+      <div style={newStyle}>
         <GlobalCss />
         <Segment className="searchForm" style={segmentStyle}>
           <Form className="form" onSubmit={handleSubmit}>
             <div className="ui grid">
               <div className="three column row ">
                 <div className="three wide column">
-                  <div className="form-btn">
-                    <img src={icon} id="icon" alt="map search icon" />
+                  <div
+                    className="form-btn"
+                    style={
+                      isOpen
+                        ? { visibility: "visible" }
+                        : { visibility: "visible" }
+                    }
+                  >
+                    <img
+                      src={icon}
+                      id="icon"
+                      alt="map search icon"
+                      onClick={setIsOpen}
+                    />
                   </div>
                 </div>
                 <div className="left floated column">
@@ -166,7 +177,7 @@ export default function Filters({ data, PriceData, setMarkers }) {
                   className="form-btn right floated column right aligned"
                   style={
                     isOpen
-                      ? { visibility: "visible" }
+                      ? { visibility: "hidden" }
                       : { visibility: "visible" }
                   }
                 >
@@ -179,13 +190,14 @@ export default function Filters({ data, PriceData, setMarkers }) {
               </div>
 
               <div className="three column row">
-                <label className="select six wide column" htmlFor="status">
+                <label className="six wide column" htmlFor="status">
                   Status
                   <select
-                    className="item mr-top"
+                    className="ui dropdown item mr-top"
                     id="status"
                     value={status}
                     onChange={(event) => setStatus(event.target.value)}
+                    style={newStyle}
                   >
                     <option>All</option>
                     <option>Available</option>
@@ -193,13 +205,14 @@ export default function Filters({ data, PriceData, setMarkers }) {
                   </select>
                 </label>
 
-                <label className="select five wide column" htmlFor="bedrooms">
+                <label className="five wide column" htmlFor="bedrooms">
                   Bedrooms
                   <select
-                    className="mr-top"
+                    className="ui dropdown mr-top"
                     id="bedrooms"
                     value={bedrooms}
                     onChange={(event) => setBedrooms(event.target.value)}
+                    style={newStyle}
                   >
                     <option>All</option>
                     {BEDROOMS.map((bedrooms) => (
@@ -210,13 +223,14 @@ export default function Filters({ data, PriceData, setMarkers }) {
                   </select>
                 </label>
 
-                <label className="select five wide column" htmlFor="status">
+                <label className="five wide column" htmlFor="status">
                   Year
                   <select
-                    className="item mr-top"
+                    className="ui dropdown item mr-top"
                     id="year"
                     value={year}
                     onChange={(event) => setYear(event.target.value)}
+                    style={newStyle}
                   >
                     <option>All</option>
                     <option>2005 or after</option>
@@ -275,14 +289,15 @@ export default function Filters({ data, PriceData, setMarkers }) {
               <div className="ui inverted divider"></div>
 
               <div className="two column row">
-                <label className="select left floated column" htmlFor="weeks">
+                <label className=" left floated column" htmlFor="weeks">
                   <p id="weeks"> Weeks</p>
                   <select
-                    className="mr-top"
+                    className="ui dropdown mr-top"
                     id="weeks"
                     value={weeks}
                     onChange={(e) => setWeeks(e.target.value)}
                     onBlur={(e) => setWeeks(e.target.value)}
+                    style={newStyle}
                   >
                     <option>Over</option>
                     {WEEKS.map((weeks) => (
@@ -292,6 +307,7 @@ export default function Filters({ data, PriceData, setMarkers }) {
                     ))}
                   </select>
                 </label>
+
                 <div className="right floated column"></div>
               </div>
             </div>
@@ -301,6 +317,11 @@ export default function Filters({ data, PriceData, setMarkers }) {
             </button>
           </Form>
         </Segment>
+        <FormMainBtn
+          styleBtn={
+            isOpen ? { visibility: "visible" } : { visibility: "hidden" }
+          }
+        />
       </div>
     </>
   );
