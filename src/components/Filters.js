@@ -183,7 +183,9 @@ export default function Filters({ data, PriceData, setMarkers }) {
                 >
                   <i
                     aria-hidden="true"
-                    className="close link icon"
+                    className="icon-custom"
+                    role="img"
+                    aria-label="Cancel"
                     onClick={setIsOpen}
                   ></i>
                 </div>
