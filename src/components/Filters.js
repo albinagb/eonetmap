@@ -6,7 +6,7 @@ import { RedMarker } from "./RedMarker";
 import { Form } from "semantic-ui-react";
 import { withStyles } from "@material-ui/core/styles";
 import Slider from "@material-ui/core/Slider";
-import { useSpring, useChain, config, animated } from "react-spring";
+import { useSpring, useChain, config } from "react-spring";
 import { Container } from "./styles";
 
 // Material UI CSS
