@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from "react";
+import React, { useState } from "react";
 import { Map, TileLayer } from "react-leaflet";
 import Filters from "./components/Filters";
 import MarkerCluster from "./components/MarkerCluster";

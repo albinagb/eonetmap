@@ -68,6 +68,7 @@ p:first-child {
 #icon {
   width: 2.5rem;
   opacity: 0.9;
+  margin: -1px 0 0 -2px;
 }
 
 #icon:hover {
@@ -119,20 +120,6 @@ p:first-child {
 
 #mls {
   padding: 0.55rem 1rem;
-}
-
-#searchIconBox {
-  z-index: 400;
-  background: hsla(146, 36%, 33%, 0.7);
-  border-radius: 6px;
-  position: absolute;
-  width: 4rem;
-  height: 4rem;
-  top: 45px;
-  left: 65px;
-  margin-top: 4px;
-  padding: 5px;
-  box-shadow: 0 0 0 3px transparent, 0 0 0 0 rgba(34, 36, 38, 0.15);
 }
 
 .form-btn {
