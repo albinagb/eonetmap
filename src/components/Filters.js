@@ -6,7 +6,7 @@ import { RedMarker } from "./RedMarker";
 import { Form } from "semantic-ui-react";
 import { withStyles } from "@material-ui/core/styles";
 import Slider from "@material-ui/core/Slider";
-import { useSpring, useChain, config } from "react-spring";
+import { useSpring, useChain, config, animated } from "react-spring";
 import { Container } from "./styles";
 
 // Material UI CSS
@@ -34,13 +34,6 @@ const GlobalCss = withStyles({
   },
 })(() => null);
 
-// const segmentStyle = {
-//   maxHeight: "calc(100vh - 3vw)",
-
-// };
-
-// css ends here
-
 const WEEKS = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 const BEDROOMS = [1, 2, 3, 4];
 
@@ -53,35 +46,58 @@ export default function Filters({ data, PriceData, setMarkers }) {
   const [checked, setChecked] = useState(false);
   const [year, setYear] = useState("All");
 
-  // btn toggle function
+  // btns toggle function
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState();
 
   // ...
 
   // Spring Animation
+
+  const AnimatedForm = animated(Form);
 
   const springRef = useRef();
   const { size1, size2, opacity, transform, ...rest } = useSpring({
     ref: springRef,
     config: config.stiff,
     from: {
-      size1: "80px",
-      size2: "80px",
-      background: "#367250",
+      size1: "90px",
+      size2: "90px",
+      background: "#36725099",
       transform: "50px",
     },
     to: {
-      size1: isOpen ? "380px" : "80px",
-      size2: isOpen ? "650px" : "80px",
+      size1: isOpen ? "380px" : "90px",
+      size2: isOpen ? "650px" : "90px",
       background: isOpen
         ? "hsla(146, 36%, 33%, 0.7)"
-        : "hsla(146, 36%, 33%, 0.7)",
+        : "hsla(146, 36%, 33%, 0.8)",
       transform: isOpen ? "70px" : "50px",
     },
   });
 
-  useChain(isOpen ? [springRef] : [springRef]);
+  // 2
+
+  const transRef = useRef();
+  const { display, opacity2, transform2, ...rest2 } = useSpring({
+    ref: transRef,
+    from: {
+      opacity2: 0,
+      transform2: "scale(1)",
+      display: "none",
+    },
+    to: {
+      transform2: isOpen ? "scale(1)" : "scale(0)",
+      display: isOpen ? "inline" : "none",
+      opacity2: isOpen ? 1 : 0,
+    },
+  });
+
+  // This will orchestrate the two animations above, comment the last arg and it creates a sequence
+  useChain(isOpen ? [springRef, transRef] : [transRef, springRef], [
+    0,
+    isOpen ? 0.1 : 0.3,
+  ]);
 
   const rangeSelector = (e, newValue) => {
     setPrice(newValue);
@@ -155,8 +171,6 @@ export default function Filters({ data, PriceData, setMarkers }) {
     setMarkers(dataClean);
   };
 
-  const newStyle = isOpen ? { visibility: "visible" } : { display: "none" };
-
   // ....
 
   return (
@@ -170,36 +184,40 @@ export default function Filters({ data, PriceData, setMarkers }) {
           left: transform,
         }}
       >
+        <div
+          className="search-icon"
+          onClick={() => setIsOpen((isOpen) => !isOpen)}
+          style={isOpen ? { visibility: "visible" } : { visibility: "visible" }}
+        >
+          <img src={icon} id="icon" alt="map search icon" />
+        </div>
         <GlobalCss />
-        <Form className="form" onSubmit={handleSubmit}>
+        <AnimatedForm
+          style={{ ...rest2, display, opacity2, transform2 }}
+          className="form"
+          onSubmit={handleSubmit}
+        >
           <div className="ui grid">
             <div className="three column row ">
-              <div className="three wide column">
-                <div className="form-btn">
-                  <img
-                    src={icon}
-                    id="icon"
-                    alt="map search icon"
-                    onClick={() => setIsOpen((isOpen) => !isOpen)}
-                  />
-                </div>
-              </div>
-              <div className="left floated column" style={newStyle}>
+              <div className="three wide column"></div>
+              <div className="left floated column">
                 <h2>Filters</h2>
               </div>
-              <div className="form-btn right floated column right aligned">
+              <div className="right floated column right aligned">
                 <i
                   aria-hidden="true"
                   className="icon-custom"
                   role="img"
                   aria-label="Cancel"
-                  style={newStyle}
                   onClick={() => setIsOpen((isOpen) => !isOpen)}
+                  style={
+                    isOpen ? { visibility: "visible" } : { display: "none" }
+                  }
                 ></i>
               </div>
             </div>
 
-            <div className="three column row" style={newStyle}>
+            <div className="three column row">
               <label className="six wide column" htmlFor="status">
                 Status
                 <select
@@ -207,7 +225,6 @@ export default function Filters({ data, PriceData, setMarkers }) {
                   id="status"
                   value={status}
                   onChange={(event) => setStatus(event.target.value)}
-                  style={newStyle}
                 >
                   <option>All</option>
                   <option>Available</option>
@@ -222,7 +239,6 @@ export default function Filters({ data, PriceData, setMarkers }) {
                   id="bedrooms"
                   value={bedrooms}
                   onChange={(event) => setBedrooms(event.target.value)}
-                  style={newStyle}
                 >
                   <option>All</option>
                   {BEDROOMS.map((bedrooms) => (
@@ -233,18 +249,13 @@ export default function Filters({ data, PriceData, setMarkers }) {
                 </select>
               </label>
 
-              <label
-                className="five wide column"
-                htmlFor="status"
-                style={newStyle}
-              >
+              <label className="five wide column" htmlFor="status">
                 Year
                 <select
                   className="ui dropdown item mr-top"
                   id="year"
                   value={year}
                   onChange={(event) => setYear(event.target.value)}
-                  style={newStyle}
                 >
                   <option>All</option>
                   <option>2005 or after</option>
@@ -254,9 +265,9 @@ export default function Filters({ data, PriceData, setMarkers }) {
               </label>
             </div>
 
-            <div className="ui inverted divider" style={newStyle}></div>
+            <div className="ui inverted divider"></div>
 
-            <div className="sliderBox" style={newStyle}>
+            <div className="sliderBox">
               <div>
                 <Typography id="range-slider" gutterBottom>
                   Select Price Range:
@@ -275,7 +286,7 @@ export default function Filters({ data, PriceData, setMarkers }) {
               </div>
             </div>
 
-            <div className="three column row" style={newStyle}>
+            <div className="three column row">
               <label className="eight wide column" htmlFor="mls">
                 <p id="secondPf">Search by ID_</p>
                 <input
@@ -300,9 +311,9 @@ export default function Filters({ data, PriceData, setMarkers }) {
               </div>
             </div>
 
-            <div className="ui inverted divider" style={newStyle}></div>
+            <div className="ui inverted divider"></div>
 
-            <div className="two column row" style={newStyle}>
+            <div className="two column row">
               <label className=" left floated column" htmlFor="weeks">
                 <p id="weeks"> Weeks</p>
                 <select
@@ -311,7 +322,6 @@ export default function Filters({ data, PriceData, setMarkers }) {
                   value={weeks}
                   onChange={(e) => setWeeks(e.target.value)}
                   onBlur={(e) => setWeeks(e.target.value)}
-                  style={newStyle}
                 >
                   <option>Over</option>
                   {WEEKS.map((weeks) => (
@@ -326,10 +336,10 @@ export default function Filters({ data, PriceData, setMarkers }) {
             </div>
           </div>
 
-          <button id="button" type="submit" value="Submit" style={newStyle}>
+          <button id="button" type="submit" value="Submit">
             Submit
           </button>
-        </Form>
+        </AnimatedForm>
       </Container>
     </>
   );

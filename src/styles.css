@@ -36,6 +36,7 @@ p:first-child {
 /* <= paragraphs */
 
 .leaflet-control-container {
+  margin-top: 0.5rem;
   position: absolute;
   margin-left: 0rem;
 }
@@ -65,13 +66,26 @@ p:first-child {
   margin-top: 0.4rem;
 }
 
+/* maxHeight: "calc(100vh - 3vw)" */
+
 #icon {
-  width: 2.5rem;
-  opacity: 0.9;
-  margin: -1px 0 0 -2px;
+  position: absolute;
+  z-index: 600;
 }
 
-#icon:hover {
+.search-icon #icon {
+  display: block;
+  font-size: 0;
+  width: 3.3rem;
+  height: 3.3rem;
+  border: 0;
+  opacity: 0.9;
+  margin: 20px 0 0 20px;
+  background: transparent;
+  padding: 5px;
+}
+
+.search-icon #icon:hover {
   opacity: 1;
 }
 
@@ -92,6 +106,7 @@ p:first-child {
 }
 
 #button {
+  display: block;
   color: #4d966d;
   cursor: pointer;
   min-height: 1rem;
@@ -122,7 +137,8 @@ p:first-child {
   padding: 0.55rem 1rem;
 }
 
-.form-btn {
+.icon-custom,
+#icon {
   cursor: pointer;
 }
 

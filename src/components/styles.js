@@ -11,7 +11,7 @@ const Container = styled(animated.div)`
   box-shadow: 0px 10px 10px -5px rgba(0, 0, 0, 0.05);
   will-change: width, height;
   z-index: 400;
-  margin: -10px 0 0 0;
+  margin: -32px 0 0 0;
 `;
 
 export { Container };
