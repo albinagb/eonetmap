@@ -9,7 +9,7 @@ import Slider from "@material-ui/core/Slider";
 import { useSpring, useChain, config, animated } from "react-spring";
 import { Container } from "./styles";
 
-// Material UI CSS
+// Material UI and Semantic UI CSS changed in Global CSS
 const GlobalCss = withStyles({
   // @global is handled by jss-plugin-global.
   "@global": {
@@ -18,14 +18,14 @@ const GlobalCss = withStyles({
       color: "white",
     },
     ".MuiSlider-root": {
-      color: "white",
+      color: "#8C2B3D",
     },
     ".PrivateValueLabel-label-5": {
-      color: "#367250",
+      color: "#8C2B3D",
       fontSize: "9px",
     },
     ".ui.form select": {
-      color: "#367250",
+      color: "#8C2B3D",
     },
     ".ui.checkbox": {
       margin: "0.21rem 0 0 0",
@@ -63,15 +63,15 @@ export default function Filters({ data, PriceData, setMarkers }) {
     from: {
       size1: "90px",
       size2: "90px",
-      background: "#36725099",
+      background: "#f2ecd8",
       transform: "50px",
     },
     to: {
       size1: isOpen ? "380px" : "90px",
       size2: isOpen ? "650px" : "90px",
       background: isOpen
-        ? "hsla(146, 36%, 33%, 0.7)"
-        : "hsla(146, 36%, 33%, 0.8)",
+        ? "hsla(46, 50%, 90%, 0.9)"
+        : "hsla(46, 50%, 90%, 0.8)",
       transform: isOpen ? "70px" : "50px",
     },
   });

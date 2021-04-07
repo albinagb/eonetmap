@@ -43,7 +43,7 @@ p:first-child {
 
 .form {
   border-radius: 0.2rem;
-  color: #fff;
+  color: #8c2b3d;
   max-height: calc(100vh);
   overflow: auto;
   padding: 1.5rem;
@@ -71,6 +71,7 @@ p:first-child {
 #icon {
   position: absolute;
   z-index: 600;
+  color: #8c2b3d;
 }
 
 .search-icon #icon {
@@ -107,7 +108,7 @@ p:first-child {
 
 #button {
   display: block;
-  color: #4d966d;
+  color: #8c2b3d;
   cursor: pointer;
   min-height: 1rem;
   outline: 0;
@@ -129,7 +130,7 @@ p:first-child {
 }
 
 #button:hover {
-  color: #367250;
+  color: white;
   background: #e0e1e2;
 }
 
