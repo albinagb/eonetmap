@@ -1,11 +1,9 @@
 import React, { useState, useRef } from "react";
-import Typography from "@material-ui/core/Typography";
 import icon from "./images/icon.png";
 import { customMarker } from "./constants";
 import { RedMarker } from "./RedMarker";
 import { Form } from "semantic-ui-react";
 import { withStyles } from "@material-ui/core/styles";
-import Slider from "@material-ui/core/Slider";
 import { useSpring, useChain, config, animated } from "react-spring";
 import { Container } from "./styles";
 
@@ -14,18 +12,12 @@ const GlobalCss = withStyles({
   // @global is handled by jss-plugin-global.
   "@global": {
     // You should target [class*="MuiButton-root"] instead if you nest themes.
-    ".MuiSlider-thumb": {
-      color: "white",
-    },
-    ".MuiSlider-root": {
-      color: "#8C2B3D",
-    },
     ".PrivateValueLabel-label-5": {
-      color: "#8C2B3D",
+      color: "gray",
       fontSize: "9px",
     },
     ".ui.form select": {
-      color: "#8C2B3D",
+      color: "gray",
     },
     ".ui.checkbox": {
       margin: "0.21rem 0 0 0",
@@ -37,10 +29,9 @@ const GlobalCss = withStyles({
 const WEEKS = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 const BEDROOMS = [1, 2, 3, 4];
 
-export default function Filters({ data, PriceData, setMarkers }) {
+export default function Filters({ data, Title, setMarkers }) {
   const [bedrooms, setBedrooms] = useState("All");
   const [status, setStatus] = useState("All");
-  const [price, setPrice] = useState([0, 600000]);
   const [mls, setMls] = useState("");
   const [weeks, setWeeks] = useState("");
   const [checked, setChecked] = useState(false);
@@ -63,15 +54,13 @@ export default function Filters({ data, PriceData, setMarkers }) {
     from: {
       size1: "90px",
       size2: "90px",
-      background: "#f2ecd8",
+      background: "#8686e8",
       transform: "50px",
     },
     to: {
       size1: isOpen ? "380px" : "90px",
       size2: isOpen ? "650px" : "90px",
-      background: isOpen
-        ? "hsla(46, 50%, 90%, 0.9)"
-        : "hsla(46, 50%, 90%, 0.8)",
+      background: isOpen ? "hsla(240, 60%, 62%, 0.9)" : "#8686e8",
       transform: isOpen ? "70px" : "50px",
     },
   });
@@ -99,19 +88,12 @@ export default function Filters({ data, PriceData, setMarkers }) {
     isOpen ? 0.1 : 0.3,
   ]);
 
-  const rangeSelector = (e, newValue) => {
-    setPrice(newValue);
-  };
-
   // Object keys
   // let propertyDataKeys = Object.keys(data[0]).map((el) => {
   //   console.log(el);
   // });
 
   // Filters
-  data = data.filter(
-    (item) => item.Price >= price[0] && item.Price <= price[1]
-  );
 
   if (mls !== "") {
     data = data.filter((el) => el.MlsNumber == mls);
@@ -153,13 +135,13 @@ export default function Filters({ data, PriceData, setMarkers }) {
     if (element.status === "Available") {
       dataClean.push({
         position: { lng: element.Longitude, lat: element.Latitude },
-        text: PriceData(element),
+        text: Title(element),
         style: customMarker,
       });
     } else if (element.status === "Removed") {
       dataClean.push({
         position: { lng: element.Longitude, lat: element.Latitude },
-        text: PriceData(element),
+        text: Title(element),
         style: RedMarker,
       });
     }
@@ -267,25 +249,6 @@ export default function Filters({ data, PriceData, setMarkers }) {
 
             <div className="ui inverted divider"></div>
 
-            <div className="sliderBox">
-              <div>
-                <Typography id="range-slider" gutterBottom>
-                  Select Price Range:
-                </Typography>
-                <Slider
-                  value={price}
-                  min={0}
-                  step={25000}
-                  max={600000}
-                  onChange={rangeSelector}
-                  valueLabelDisplay="auto"
-                />
-                <p id="thirdPf">
-                  Price is between {price[0]} and {price[1]}{" "}
-                </p>
-              </div>
-            </div>
-
             <div className="three column row">
               <label className="eight wide column" htmlFor="mls">
                 <p id="secondPf">Search by ID_</p>
@@ -304,7 +267,7 @@ export default function Filters({ data, PriceData, setMarkers }) {
                   <input
                     className="ui checkbox"
                     type="checkbox"
-                    value="{checked}"
+                    checked={checked}
                     onChange={() => setChecked((checked) => !checked)}
                   />
                 </label>

@@ -1,34 +1,20 @@
-const { Pool } = require("pg");
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false,
-  },
-});
+// console.log("server starts");
+// const express = require("express");
+// const cors = require("cors");
 
-const express = require("express");
-const path = require("path");
-const app = express();
-const PORT = process.env.PORT || 5000;
+// const app = express();
 
-const publicPath = path.join(__dirname, "public");
-app
-  .use(express.static(publicPath))
-  .get("*", (req, res) => {
-    res.sendFile(path.join(publicPath, "index.html"));
-  })
-  .get("/db", async (req, res) => {
-    try {
-      const client = await pool.connect();
-      const result = await client.query("SELECT * FROM test_table");
-      const results = { results: result ? result.rows : null };
-      res.render("pages/db", results);
-      client.release();
-    } catch (err) {
-      console.error(err);
-      res.send("Error " + err);
-    }
-  })
-  .listen(PORT, () => {
-    console.log(`Server is up on ${PORT}!`);
-  });
+// const PORT = process.env.PORT || 5000 || 3000;
+
+// let corsOptions = {
+//   origin: `${PORT}`,
+// };
+
+// app.get("/get", function (req, res, next) {
+//   res.json({ msg: "This is CORS-enabled for all origins!" });
+// });
+
+// app.use(cors(corsOptions));
+// app.listen(PORT);
+
+// console.log(`running on http://localhost:${PORT}`);

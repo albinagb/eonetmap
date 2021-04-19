@@ -38,7 +38,3 @@ MarkerCluster.propTypes = {
 };
 
 export default MarkerCluster;
-
-// optionally center the map around the markers
-// map.fitBounds(mcg.getBounds());
-// // add the marker cluster group to the map
