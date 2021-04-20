@@ -13,7 +13,7 @@ const App = () => {
     setLoading(true);
     await Api.get("/events", {
       // query: {
-      //   id: "WavvLdfdP6g8aZTtbBQHTw",
+      //   id: "<query id>",
       // },
     })
       .then((res) => {

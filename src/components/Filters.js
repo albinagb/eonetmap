@@ -1,7 +1,6 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import icon from "./images/icon.png";
 import { customMarker } from "./constants";
-import { RedMarker } from "./RedMarker";
 import { Form } from "semantic-ui-react";
 import { withStyles } from "@material-ui/core/styles";
 import { useSpring, useChain, config, animated } from "react-spring";
@@ -26,16 +25,11 @@ const GlobalCss = withStyles({
   },
 })(() => null);
 
-const WEEKS = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-const BEDROOMS = [1, 2, 3, 4];
+const CATEGORIES = ["wildfires", "severeStorms", "volcanoes", "seaLakeIce"];
 
 export default function Filters({ data, Title, setMarkers }) {
-  const [bedrooms, setBedrooms] = useState("All");
+  const [categories, setCategories] = useState("All");
   const [status, setStatus] = useState("All");
-  const [mls, setMls] = useState("");
-  const [weeks, setWeeks] = useState("");
-  const [checked, setChecked] = useState(false);
-  const [year, setYear] = useState("All");
 
   // btns toggle function
 
@@ -58,14 +52,14 @@ export default function Filters({ data, Title, setMarkers }) {
       transform: "50px",
     },
     to: {
-      size1: isOpen ? "380px" : "90px",
-      size2: isOpen ? "650px" : "90px",
+      size1: isOpen ? "400px" : "90px",
+      size2: isOpen ? "220px" : "90px",
       background: isOpen ? "hsla(240, 60%, 62%, 0.9)" : "#8686e8",
       transform: isOpen ? "70px" : "50px",
     },
   });
 
-  // 2
+  // 2nd "inside elements animation"
 
   const transRef = useRef();
   const { display, opacity2, transform2, ...rest2 } = useSpring({
@@ -88,6 +82,8 @@ export default function Filters({ data, Title, setMarkers }) {
     isOpen ? 0.1 : 0.3,
   ]);
 
+  useEffect(() => {}, []);
+
   // Object keys
   // let propertyDataKeys = Object.keys(data[0]).map((el) => {
   //   console.log(el);
@@ -95,36 +91,12 @@ export default function Filters({ data, Title, setMarkers }) {
 
   // Filters
 
-  if (mls !== "") {
-    data = data.filter((el) => el.MlsNumber == mls);
-  }
-
-  if (bedrooms !== "All") {
-    data = data.filter((item) => item.Bedrooms == bedrooms);
+  if (categories !== "All") {
+    data = data.filter((item) => item.categories[0].id === categories);
   }
 
   if (status !== "All") {
     data = data.filter((item) => item.status === status);
-  }
-
-  if (checked) {
-    data = data.filter((el) => el.weeks_on_market == 0);
-  }
-
-  if (weeks !== "Over") {
-    data = data.filter((item) => item.weeks_on_market >= weeks);
-  }
-
-  if (year !== "All") {
-    if (year === "2005 or after") {
-      data = data.filter((item) => item.year >= 2005);
-    }
-    if (year === "2015 or after") {
-      data = data.filter((item) => item.year >= 2015);
-    }
-    if (year === "uknown") {
-      data = data.filter((item) => item.year === 0);
-    }
   }
 
   // Status
@@ -142,7 +114,7 @@ export default function Filters({ data, Title, setMarkers }) {
       dataClean.push({
         position: { lng: element.Longitude, lat: element.Latitude },
         text: Title(element),
-        style: RedMarker,
+        // style: RedMarker,
       });
     }
   });
@@ -180,7 +152,7 @@ export default function Filters({ data, Title, setMarkers }) {
           onSubmit={handleSubmit}
         >
           <div className="ui grid">
-            <div className="three column row ">
+            <div className="three column row">
               <div className="three wide column"></div>
               <div className="left floated column">
                 <h2>Filters</h2>
@@ -198,8 +170,7 @@ export default function Filters({ data, Title, setMarkers }) {
                 ></i>
               </div>
             </div>
-
-            <div className="three column row">
+            <div className="three column row cont-box">
               <label className="six wide column" htmlFor="status">
                 Status
                 <select
@@ -209,99 +180,34 @@ export default function Filters({ data, Title, setMarkers }) {
                   onChange={(event) => setStatus(event.target.value)}
                 >
                   <option>All</option>
-                  <option>Available</option>
-                  <option>Removed</option>
+                  <option>closed</option>
+                  <option>open</option>
                 </select>
               </label>
 
               <label className="five wide column" htmlFor="bedrooms">
-                Bedrooms
+                Categories
                 <select
                   className="ui dropdown mr-top"
-                  id="bedrooms"
-                  value={bedrooms}
-                  onChange={(event) => setBedrooms(event.target.value)}
+                  id="categories"
+                  value={categories}
+                  onChange={(event) => setCategories(event.target.value)}
                 >
                   <option>All</option>
-                  {BEDROOMS.map((bedrooms) => (
-                    <option key={bedrooms} value={bedrooms}>
-                      {bedrooms}
+                  {CATEGORIES.map((categories) => (
+                    <option key={categories} value={categories}>
+                      {categories}
                     </option>
                   ))}
                 </select>
               </label>
-
-              <label className="five wide column" htmlFor="status">
-                Year
-                <select
-                  className="ui dropdown item mr-top"
-                  id="year"
-                  value={year}
-                  onChange={(event) => setYear(event.target.value)}
-                >
-                  <option>All</option>
-                  <option>2005 or after</option>
-                  <option>2015 or after</option>
-                  <option>unknown year</option>
-                </select>
-              </label>
-            </div>
-
-            <div className="ui inverted divider"></div>
-
-            <div className="three column row">
-              <label className="eight wide column" htmlFor="mls">
-                <p id="secondPf">Search by ID_</p>
-                <input
-                  className=""
-                  id="mls"
-                  value={mls}
-                  placeholder="ID_"
-                  onChange={(e) => setMls(e.target.value)}
-                />
-              </label>
-
-              <div id="chxContainer">
-                New:
-                <label className="four wide column">
-                  <input
-                    className="ui checkbox"
-                    type="checkbox"
-                    checked={checked}
-                    onChange={() => setChecked((checked) => !checked)}
-                  />
-                </label>
+              <div className="five wide column">
+                <button id="button" type="submit" value="Submit">
+                  Submit
+                </button>
               </div>
             </div>
-
-            <div className="ui inverted divider"></div>
-
-            <div className="two column row">
-              <label className=" left floated column" htmlFor="weeks">
-                <p id="weeks"> Weeks</p>
-                <select
-                  className="ui dropdown mr-top"
-                  id="weeks"
-                  value={weeks}
-                  onChange={(e) => setWeeks(e.target.value)}
-                  onBlur={(e) => setWeeks(e.target.value)}
-                >
-                  <option>Over</option>
-                  {WEEKS.map((weeks) => (
-                    <option key={weeks} value={weeks}>
-                      {weeks}
-                    </option>
-                  ))}
-                </select>
-              </label>
-
-              <div className="right floated column"></div>
-            </div>
           </div>
-
-          <button id="button" type="submit" value="Submit">
-            Submit
-          </button>
         </AnimatedForm>
       </Container>
     </>

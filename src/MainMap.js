@@ -4,18 +4,21 @@ import Filters from "./components/Filters";
 import MarkerCluster from "./components/MarkerCluster";
 import { customMarker } from "./components/constants";
 
-const position = [45.503, -73.595];
+const position = [8.783, 34.508];
 const mapStyle = { height: "100vh" };
 
-function NewDataArray(data) {
-  console.log(data);
+function NewDataArray(data, i) {
   let dataClean = [];
   data.forEach((element) => {
-    if (element.categories[0].id === 8) {
+    console.log(element.categories[0].id);
+    if (
+      element.categories[0].id &&
+      typeof element.geometry[0].coordinates[1] == "number"
+    ) {
       dataClean.push({
         position: {
-          lng: element.geometries[0].coordinates[0],
-          lat: element.geometries[0].coordinates[1],
+          lng: element.geometry[0].coordinates[0],
+          lat: element.geometry[0].coordinates[1],
         },
         text: TitleData(element),
         style: customMarker,
@@ -37,6 +40,7 @@ function TitleData(element) {
 
 const MainMap = ({ data = [] }) => {
   let dataClean = NewDataArray(data);
+
   const [markers, setMarkers] = useState(dataClean);
 
   return (

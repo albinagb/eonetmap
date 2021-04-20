@@ -7,7 +7,11 @@ import "leaflet.markercluster/dist/MarkerCluster.Default.css";
 import { useLeaflet } from "react-leaflet";
 import { customMarker } from "./constants";
 
-const mcg = L.markerClusterGroup();
+const mcg = L.markerClusterGroup({
+  maxClusterRadius: 50,
+  showCoverageOnHover: false,
+  zoomToBoundsOnClick: true,
+});
 
 const MarkerCluster = ({ markers }) => {
   const { map } = useLeaflet();
