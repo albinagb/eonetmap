@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Api from "./api/Api";
 import "leaflet/dist/leaflet.css";
-import MainMap from "./MainMap";
+import MainMap from "./components/MainMap";
 import Loader from "./components/Loader";
 
 const App = () => {

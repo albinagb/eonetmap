@@ -5,7 +5,11 @@ import "leaflet.markercluster/dist/leaflet.markercluster";
 import "leaflet.markercluster/dist/MarkerCluster.css";
 import "leaflet.markercluster/dist/MarkerCluster.Default.css";
 import { useLeaflet } from "react-leaflet";
-import { customMarker } from "./constants";
+import { MarkerFire } from "./markers/MarkerFire";
+import { MarkerVolcano } from "./markers/MarkerVolcano";
+import { MarkerIce } from "./markers/MarkerIce";
+import { MarkerStorm } from "./markers/MarkerStorm";
+import { MarkerOther } from "./markers/MarkerOther";
 
 const mcg = L.markerClusterGroup({
   maxClusterRadius: 50,
@@ -18,9 +22,10 @@ const MarkerCluster = ({ markers }) => {
 
   useEffect(() => {
     mcg.clearLayers();
-    markers.forEach(({ position, text }) =>
+    console.log(markers);
+    markers.forEach(({ position, text, type }) =>
       L.marker(new L.LatLng(position.lat, position.lng), {
-        icon: customMarker,
+        icon: assignMarker(type),
       })
         .addTo(mcg)
         .bindPopup(text)
@@ -31,6 +36,21 @@ const MarkerCluster = ({ markers }) => {
 
   return null;
 };
+
+function assignMarker(type) {
+  console.log(type);
+  if (type === "volcano") {
+    return MarkerVolcano;
+  } else if (type === "red-fire") {
+    return MarkerFire;
+  } else if (type === "ice") {
+    return MarkerIce;
+  } else if (type === "storm") {
+    return MarkerStorm;
+  } else {
+    return MarkerOther;
+  }
+}
 
 MarkerCluster.propTypes = {
   markers: PropTypes.arrayOf(

@@ -12,32 +12,72 @@ html {
   font-weight: 300;
 }
 
+/* categories + btn */
+
+#subtn {
+  margin-top: -2.5rem;
+}
+
 .cont-box {
   margin-top: 0.9rem;
 }
 
-/* paragraphs => */
+#description-block {
+  margin-top: 1.1rem;
+}
 
-p:first-child {
-  margin: -1rem 0 0.6rem -0.8rem;
+p {
+  margin: 1.3rem 0.5rem 0 0.5rem;
   font-family: "Avenir", "Helvetica", sans-serif;
   font-weight: 300;
 }
 
-#secondPf {
-  margin: 0 0 0.6rem 0.1rem;
-}
-
-#thirdPf {
-  margin: 0.3rem 0 0 -0.9rem;
-}
-
-/* <= paragraphs */
-
 .leaflet-control-container {
   margin-top: 0.5rem;
   position: absolute;
-  margin-left: 0rem;
+  margin-left: 0.1rem;
+}
+
+/* leaflet icons */
+
+.red-fire {
+  display: inline-block;
+  background: url("https://api.iconify.design/noto:fire.svg") no-repeat center
+    center / contain;
+  vertical-align: -0.125em;
+  background-repeat: no-repeat;
+}
+
+.volcano {
+  display: inline-block;
+  background: url("https://api.iconify.design/twemoji:volcano.svg") no-repeat
+    center center / contain;
+  vertical-align: -0.125em;
+  background-repeat: no-repeat;
+}
+
+.ice {
+  display: inline-block;
+  background: url("https://api.iconify.design/noto:ice.svg") no-repeat center
+    center / contain;
+  vertical-align: -0.125em;
+  background-repeat: no-repeat;
+}
+
+.storm {
+  display: inline-block;
+  background: url("https://api.iconify.design/noto:cyclone.svg") no-repeat
+    center center / contain;
+  vertical-align: -0.125em;
+  background-repeat: no-repeat;
+}
+
+.other {
+  display: inline-block;
+  background: url("https://api.iconify.design/jam:periscope.svg?color=red")
+    no-repeat center center / contain;
+  vertical-align: -0.125em;
+  background-repeat: no-repeat;
 }
 
 .form {
@@ -55,7 +95,7 @@ p:first-child {
 }
 
 .mr-top {
-  margin-top: 0.4rem;
+  margin-top: 0.6rem;
 }
 
 /* maxHeight: "calc(100vh - 3vw)" */
@@ -81,32 +121,8 @@ p:first-child {
   opacity: 1;
 }
 
-#button {
-  display: block;
-  color: gray;
-  cursor: pointer;
-  min-height: 1rem;
-  outline: 0;
-  border: none;
-  background: white;
-  margin-top: 2rem;
-  padding: 0.8rem 1.3rem;
-  text-shadow: none;
-  font-weight: 500;
-  line-height: 0.5rem;
-  font-style: normal;
-  text-align: center;
-  text-decoration: none;
-  border-radius: 0.28571429rem;
-  box-shadow: 0 0 0 1px transparent inset, 0 0 0 0 rgba(34, 36, 38, 0.15) inset;
-  transition: opacity 0.1s ease, background-color 0.1s ease, color 0.1s ease,
-    box-shadow 0.1s ease, background 0.1s ease;
+.button {
   float: right;
-}
-
-#button:hover {
-  color: darkgray;
-  background: #eaf1f8;
 }
 
 .icon-custom,
@@ -148,4 +164,16 @@ p:first-child {
 
 .loader h1 {
   margin-top: -100px;
+}
+
+.link {
+  color: white;
+  margin: 0 0.2rem 0 0.5rem;
+  border-bottom: 0.5px solid white;
+}
+
+.link:hover {
+  color: orange;
+  cursor: pointer;
+  border-bottom: 1px solid orange;
 }

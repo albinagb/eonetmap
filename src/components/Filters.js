@@ -1,44 +1,17 @@
 import React, { useState, useRef, useEffect } from "react";
 import icon from "./images/icon.png";
-import { customMarker } from "./constants";
+// import { customMarker } from "./constants";
 import { Form } from "semantic-ui-react";
-import { withStyles } from "@material-ui/core/styles";
 import { useSpring, useChain, config, animated } from "react-spring";
 import { Container } from "./styles";
-
-// Material UI and Semantic UI CSS changed in Global CSS
-const GlobalCss = withStyles({
-  // @global is handled by jss-plugin-global.
-  "@global": {
-    // You should target [class*="MuiButton-root"] instead if you nest themes.
-    ".PrivateValueLabel-label-5": {
-      color: "gray",
-      fontSize: "9px",
-    },
-    ".ui.form select": {
-      color: "gray",
-    },
-    ".ui.checkbox": {
-      margin: "0.21rem 0 0 0",
-      width: "5rem",
-    },
-  },
-})(() => null);
-
-const CATEGORIES = ["wildfires", "severeStorms", "volcanoes", "seaLakeIce"];
+import Description from "./Description";
 
 export default function Filters({ data, Title, setMarkers }) {
   const [categories, setCategories] = useState("All");
-  const [status, setStatus] = useState("All");
-
-  // btns toggle function
-
-  const [isOpen, setIsOpen] = useState();
-
-  // ...
 
   // Spring Animation
 
+  const [isOpen, setIsOpen] = useState();
   const AnimatedForm = animated(Form);
 
   const springRef = useRef();
@@ -52,8 +25,8 @@ export default function Filters({ data, Title, setMarkers }) {
       transform: "50px",
     },
     to: {
-      size1: isOpen ? "400px" : "90px",
-      size2: isOpen ? "220px" : "90px",
+      size1: isOpen ? "360px" : "90px",
+      size2: isOpen ? "470px" : "90px",
       background: isOpen ? "hsla(240, 60%, 62%, 0.9)" : "#8686e8",
       transform: isOpen ? "70px" : "50px",
     },
@@ -84,19 +57,17 @@ export default function Filters({ data, Title, setMarkers }) {
 
   useEffect(() => {}, []);
 
-  // Object keys
-  // let propertyDataKeys = Object.keys(data[0]).map((el) => {
-  //   console.log(el);
-  // });
-
   // Filters
 
-  if (categories !== "All") {
-    data = data.filter((item) => item.categories[0].id === categories);
-  }
+  const CATEGORIES = [
+    "Wildfires",
+    "Severe Storms",
+    "Volcanoes",
+    "Sea and Lake Ice",
+  ];
 
-  if (status !== "All") {
-    data = data.filter((item) => item.status === status);
+  if (categories !== "All") {
+    data = data.filter((item) => item.categories[0].title === categories);
   }
 
   // Status
@@ -104,20 +75,34 @@ export default function Filters({ data, Title, setMarkers }) {
   let dataClean = [];
 
   data.forEach((element) => {
-    if (element.status === "Available") {
+    if (
+      element.categories[0].id &&
+      typeof element.geometry[0].coordinates[1] == "number"
+    ) {
       dataClean.push({
-        position: { lng: element.Longitude, lat: element.Latitude },
+        position: {
+          lng: element.geometry[0].coordinates[0],
+          lat: element.geometry[0].coordinates[1],
+        },
         text: Title(element),
-        style: customMarker,
-      });
-    } else if (element.status === "Removed") {
-      dataClean.push({
-        position: { lng: element.Longitude, lat: element.Latitude },
-        text: Title(element),
-        // style: RedMarker,
+        type: AssignType(element),
       });
     }
   });
+
+  function AssignType(element) {
+    if (element.categories[0].id === "volcanoes") {
+      return "volcano";
+    } else if (element.categories[0].id === "wildfires") {
+      return "red-fire";
+    } else if (element.categories[0].id === "severeStorms") {
+      return "storm";
+    } else if (element.categories[0].id === "seaLakeIce") {
+      return "ice";
+    } else {
+      return "ice";
+    }
+  }
 
   // Submit Function
   const handleSubmit = (event) => {
@@ -145,7 +130,6 @@ export default function Filters({ data, Title, setMarkers }) {
         >
           <img src={icon} id="icon" alt="map search icon" />
         </div>
-        <GlobalCss />
         <AnimatedForm
           style={{ ...rest2, display, opacity2, transform2 }}
           className="form"
@@ -170,22 +154,12 @@ export default function Filters({ data, Title, setMarkers }) {
                 ></i>
               </div>
             </div>
-            <div className="three column row cont-box">
-              <label className="six wide column" htmlFor="status">
-                Status
-                <select
-                  className="ui dropdown item mr-top"
-                  id="status"
-                  value={status}
-                  onChange={(event) => setStatus(event.target.value)}
-                >
-                  <option>All</option>
-                  <option>closed</option>
-                  <option>open</option>
-                </select>
-              </label>
-
-              <label className="five wide column" htmlFor="bedrooms">
+            <Description />
+            <div className="two column row cont-box">
+              <label
+                className="ten wide left floated column"
+                htmlFor="categories"
+              >
                 Categories
                 <select
                   className="ui dropdown mr-top"
@@ -201,8 +175,12 @@ export default function Filters({ data, Title, setMarkers }) {
                   ))}
                 </select>
               </label>
-              <div className="five wide column">
-                <button id="button" type="submit" value="Submit">
+              <div id="subtn" className="right floated column">
+                <button
+                  className="ui white basic inverted button"
+                  type="submit"
+                  value="Submit"
+                >
                   Submit
                 </button>
               </div>
