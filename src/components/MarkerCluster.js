@@ -22,7 +22,7 @@ const MarkerCluster = ({ markers }) => {
 
   useEffect(() => {
     mcg.clearLayers();
-    console.log(markers);
+
     markers.forEach(({ position, text, type }) =>
       L.marker(new L.LatLng(position.lat, position.lng), {
         icon: assignMarker(type),
@@ -38,7 +38,6 @@ const MarkerCluster = ({ markers }) => {
 };
 
 function assignMarker(type) {
-  console.log(type);
   if (type === "volcano") {
     return MarkerVolcano;
   } else if (type === "red-fire") {

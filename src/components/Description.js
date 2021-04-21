@@ -1,6 +1,6 @@
 import React from "react";
 
-let myUrl = "https://www.linkedin.com/in/albagaby/";
+let myUrl = "https://albinagb.github.io";
 let nasaUrl = "https://eonet.sci.gsfc.nasa.gov/";
 
 class Description extends React.Component {
@@ -9,9 +9,9 @@ class Description extends React.Component {
       <div id="description-block">
         <p>
           This Geo Data project is based on an Earth Observatory Natural Events
-          Tracker
+          Tracker API
           <a className="link" target="blank" href={nasaUrl}>
-            API provided by NASA
+            provided by NASA
           </a>
           . The API returns currently active natural disasters.
         </p>

@@ -1,11 +1,7 @@
-import { element } from "prop-types";
 import React, { useState } from "react";
 import { Map, TileLayer } from "react-leaflet";
 import Filters from "./Filters";
 import MarkerCluster from "./MarkerCluster";
-// import LocationMarker from "./markers/LocationMarker";
-
-// console.log(LocationMarker);
 
 const position = [8.783, 34.508];
 const mapStyle = { height: "100vh" };
@@ -13,7 +9,6 @@ const mapStyle = { height: "100vh" };
 function NewDataArray(data, i) {
   let dataClean = [];
   data.forEach((element) => {
-    // console.log(element.categories[0]);
     if (
       element.categories[0].id &&
       typeof element.geometry[0].coordinates[1] == "number"
@@ -41,7 +36,7 @@ function AssignType(element) {
   } else if (element.categories[0].id === "seaLakeIce") {
     return "ice";
   } else {
-    return "ice";
+    return "other";
   }
 }
 
@@ -68,7 +63,6 @@ const MainMap = ({ data = [] }) => {
           url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         />
-        {/* <LocationMarker type={AssignType} /> */}
         <MarkerCluster markers={markers} />
       </Map>
       <Filters

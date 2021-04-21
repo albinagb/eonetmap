@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from "react";
 import icon from "./images/icon.png";
-// import { customMarker } from "./constants";
 import { Form } from "semantic-ui-react";
 import { useSpring, useChain, config, animated } from "react-spring";
 import { Container } from "./styles";
@@ -55,7 +54,11 @@ export default function Filters({ data, Title, setMarkers }) {
     isOpen ? 0.1 : 0.3,
   ]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (!isOpen) {
+      setIsOpen(false);
+    }
+  }, [isOpen]);
 
   // Filters
 

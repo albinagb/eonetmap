@@ -28,7 +28,6 @@ html {
 
 p {
   margin: 1.3rem 0.5rem 0 0.5rem;
-  font-family: "Avenir", "Helvetica", sans-serif;
   font-weight: 300;
 }
 
@@ -149,11 +148,37 @@ p {
 }
 
 .loader {
+  font-family: "Avenir Next Ultra Light";
+  font-size: 2.8rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  color: rgb(221, 221, 221);
+}
+
+#timer {
+  font-family: "Avenir";
+  animation: color-change 1s infinite;
+}
+
+@keyframes color-change {
+  0% {
+    color: rgb(226, 145, 145);
+  }
+  20% {
+    color: rgb(192, 36, 49);
+  }
+  50% {
+    color: rgb(195, 42, 241);
+  }
+  80% {
+    color: rgb(18, 120, 179);
+  }
+  100% {
+    color: rgb(0, 255, 136);
+  }
 }
 
 .link {
@@ -163,7 +188,7 @@ p {
 }
 
 .link:hover {
-  color: orange;
+  color: #a3ff81;
   cursor: pointer;
-  border-bottom: 1px solid orange;
+  border-bottom: 1px solid #a3ff81;
 }
