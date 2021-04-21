@@ -142,7 +142,7 @@ export default function Filters({ data, Title, setMarkers }) {
             <div className="three column row">
               <div className="three wide column"></div>
               <div className="left floated column">
-                <h2>Filters</h2>
+                <h2>Information</h2>
               </div>
               <div className="right floated column right aligned">
                 <i
@@ -163,7 +163,7 @@ export default function Filters({ data, Title, setMarkers }) {
                 className="ten wide left floated column"
                 htmlFor="categories"
               >
-                Categories
+                Category Filter
                 <select
                   className="ui dropdown mr-top"
                   id="categories"
