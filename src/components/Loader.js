@@ -1,12 +1,33 @@
-import spinner from "./images/spinner.gif";
+import { Component } from "react";
 
-const Loader = () => {
-  return (
-    <div className="loader">
-      <img src={spinner} alt="Loading" />
-      <h1>Loading</h1>
-    </div>
-  );
-};
+class Loader extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { date: new Date() };
+  }
+
+  componentDidMount() {
+    this.time = setInterval(
+      () =>
+        this.setState({
+          date: new Date(),
+        }),
+      1000
+    );
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.time);
+  }
+
+  render() {
+    return (
+      <div className="loader">
+        Loading: {this.state.date.toLocaleTimeString()}
+      </div>
+    );
+  }
+}
 
 export default Loader;
