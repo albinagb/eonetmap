@@ -5,7 +5,7 @@ import { useSpring, useChain, config, animated } from "react-spring";
 import { Container } from "./styles";
 import Description from "./Description";
 
-export default function Filters({ data, Title, setMarkers }) {
+export default function Filters({ data, Title, setMarkers, MakeToolTip }) {
   const [categories, setCategories] = useState("All");
 
   // Spring Animation
@@ -88,6 +88,7 @@ export default function Filters({ data, Title, setMarkers }) {
           lat: element.geometry[0].coordinates[1],
         },
         text: Title(element),
+        tooltip: MakeToolTip(element),
         type: AssignType(element),
       });
     }
@@ -103,7 +104,7 @@ export default function Filters({ data, Title, setMarkers }) {
     } else if (element.categories[0].id === "seaLakeIce") {
       return "ice";
     } else {
-      return "ice";
+      return "other";
     }
   }
 

@@ -75,6 +75,7 @@ const MainMap = ({ data = [] }) => {
         data={data}
         setMarkers={setMarkers}
         Title={TitleData}
+        MakeToolTip={MakeToolTip}
         markers={markers}
       />
     </>
