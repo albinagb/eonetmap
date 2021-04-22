@@ -1,3 +1,7 @@
+This Geo Data project is based on an Earth Observatory Natural Events Tracker APIprovided by NASA. The API returns currently active natural disasters.
+
+Technologies used: React, Leaflet React Libraries, CSS and Animation with Styled Components, React Spring and Semantic UI. Designed in Sketch.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
