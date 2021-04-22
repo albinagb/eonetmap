@@ -11,14 +11,9 @@ const App = () => {
 
   const getData = async () => {
     setLoading(true);
-    await Api.get("/events", {
-      // query: {
-      //   id: "<query id>",
-      // },
-    })
+    await Api.get("/events", {})
       .then((res) => {
         const events = res.data.events;
-        // console.log(events);
         setResponseData(events);
         setLoading(false);
       })

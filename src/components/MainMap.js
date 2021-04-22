@@ -19,6 +19,7 @@ function NewDataArray(data, i) {
           lat: element.geometry[0].coordinates[1],
         },
         text: TitleData(element),
+        tooltip: MakeToolTip(element),
         type: AssignType(element),
       });
     }
@@ -42,11 +43,16 @@ function AssignType(element) {
 
 function TitleData(element) {
   let labelText = `Type of disaster: ${element.categories[0].title}
-  </br></br>
+  </br>
   ID: ${element.id}
-  </br></br>
-  Location: ${element.title}`;
+  </br>
+  Location: <a href="https://www.google.com/search?q=${element.title}" target="_blank">${element.title}</a>`;
 
+  return labelText;
+}
+
+function MakeToolTip(element) {
+  let labelText = `${element.title}`;
   return labelText;
 }
 

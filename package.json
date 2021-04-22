@@ -10,6 +10,7 @@
     "axios": "^0.21.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "ejs": "^3.1.5",
     "leaflet": "1.6.0",
     "leaflet-geosearch": "3.2.1",
     "leaflet.markercluster": "1.4.1",

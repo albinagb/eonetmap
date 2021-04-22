@@ -23,12 +23,13 @@ const MarkerCluster = ({ markers }) => {
   useEffect(() => {
     mcg.clearLayers();
 
-    markers.forEach(({ position, text, type }) =>
+    markers.forEach(({ position, text, type, tooltip }) =>
       L.marker(new L.LatLng(position.lat, position.lng), {
         icon: assignMarker(type),
       })
         .addTo(mcg)
         .bindPopup(text)
+        .bindTooltip(tooltip)
     );
 
     map.addLayer(mcg);
