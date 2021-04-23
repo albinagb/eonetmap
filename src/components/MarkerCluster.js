@@ -12,7 +12,7 @@ import { MarkerStorm } from "./markers/MarkerStorm";
 import { MarkerOther } from "./markers/MarkerOther";
 
 const mcg = L.markerClusterGroup({
-  maxClusterRadius: 50,
+  maxClusterRadius: 0,
   showCoverageOnHover: false,
   zoomToBoundsOnClick: true,
 });
