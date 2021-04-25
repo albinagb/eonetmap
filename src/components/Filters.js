@@ -11,8 +11,7 @@ export default function Filters({ data, Title, setMarkers, MakeToolTip }) {
   const [categories, setCategories] = useState("All");
   let isMobile = useMediaQuery("(max-width: 1100px)");
 
-  // Spring Animation
-
+  // React Spring Animation
   const [isOpen, setIsOpen] = useState();
   const AnimatedForm = animated(Form);
 
@@ -36,7 +35,7 @@ export default function Filters({ data, Title, setMarkers, MakeToolTip }) {
       size4: "75px",
       background: "#8686e8",
       transform: "50px",
-      transformMobile: "45px",
+      transformMobile: "55px",
     },
     to: {
       size1: isOpen ? "360px" : "90px",
@@ -45,11 +44,11 @@ export default function Filters({ data, Title, setMarkers, MakeToolTip }) {
       size4: isOpen ? "410px" : "75px",
       background: isOpen ? "hsla(240, 60%, 62%, 0.9)" : "#8686e8",
       transform: isOpen ? "70px" : "50px",
-      transformMobile: isOpen ? "55px" : "45px",
+      transformMobile: isOpen ? "56px" : "55px",
     },
   });
 
-  // 2nd "inside elements animation"
+  // 2nd "inside elements react spring animation"
 
   const transRef = useRef();
   const { display, opacity2, transform2, ...rest2 } = useSpring({
@@ -92,7 +91,6 @@ export default function Filters({ data, Title, setMarkers, MakeToolTip }) {
   }
 
   // Status
-
   let dataClean = [];
 
   data.forEach((element) => {
