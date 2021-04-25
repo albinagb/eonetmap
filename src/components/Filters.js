@@ -4,9 +4,12 @@ import { Form } from "semantic-ui-react";
 import { useSpring, useChain, config, animated } from "react-spring";
 import { Container } from "./styles";
 import Description from "./Description";
+import MobileDescription from "./MobileDescription";
+import { useMediaQuery } from "../hooks/useMediaQuery";
 
 export default function Filters({ data, Title, setMarkers, MakeToolTip }) {
   const [categories, setCategories] = useState("All");
+  let isMobile = useMediaQuery("(max-width: 1100px)");
 
   // Spring Animation
 
@@ -14,20 +17,35 @@ export default function Filters({ data, Title, setMarkers, MakeToolTip }) {
   const AnimatedForm = animated(Form);
 
   const springRef = useRef();
-  const { size1, size2, opacity, transform, ...rest } = useSpring({
+  const {
+    size1,
+    size2,
+    size3,
+    size4,
+    opacity,
+    transform,
+    transformMobile,
+    ...rest
+  } = useSpring({
     ref: springRef,
     config: config.stiff,
     from: {
       size1: "90px",
       size2: "90px",
+      size3: "75px",
+      size4: "75px",
       background: "#8686e8",
       transform: "50px",
+      transformMobile: "45px",
     },
     to: {
       size1: isOpen ? "360px" : "90px",
       size2: isOpen ? "470px" : "90px",
+      size3: isOpen ? "263px" : "75px",
+      size4: isOpen ? "410px" : "75px",
       background: isOpen ? "hsla(240, 60%, 62%, 0.9)" : "#8686e8",
       transform: isOpen ? "70px" : "50px",
+      transformMobile: isOpen ? "55px" : "45px",
     },
   });
 
@@ -118,80 +136,163 @@ export default function Filters({ data, Title, setMarkers, MakeToolTip }) {
 
   return (
     <>
-      <Container
-        style={{
-          ...rest,
-          width: size1,
-          height: size2,
-          top: transform,
-          left: transform,
-        }}
-      >
-        <div
-          className="search-icon"
-          onClick={() => setIsOpen((isOpen) => !isOpen)}
-          style={isOpen ? { visibility: "visible" } : { visibility: "visible" }}
+      {!isMobile && (
+        <Container
+          style={{
+            ...rest,
+            width: size1,
+            height: size2,
+            top: transform,
+            left: transform,
+          }}
         >
-          <img src={icon} id="icon" alt="map search icon" />
-        </div>
-        <AnimatedForm
-          style={{ ...rest2, display, opacity2, transform2 }}
-          className="form"
-          onSubmit={handleSubmit}
-        >
-          <div className="ui grid">
-            <div className="three column row">
-              <div className="three wide column"></div>
-              <div className="left floated column">
-                <h2>Information</h2>
-              </div>
-              <div className="right floated column right aligned">
-                <i
-                  aria-hidden="true"
-                  className="icon-custom"
-                  role="img"
-                  aria-label="Cancel"
-                  onClick={() => setIsOpen((isOpen) => !isOpen)}
-                  style={
-                    isOpen ? { visibility: "visible" } : { display: "none" }
-                  }
-                ></i>
-              </div>
-            </div>
-            <Description />
-            <div className="two column row cont-box">
-              <label
-                className="ten wide left floated column"
-                htmlFor="categories"
-              >
-                Category Filter
-                <select
-                  className="ui dropdown mr-top"
-                  id="categories"
-                  value={categories}
-                  onChange={(event) => setCategories(event.target.value)}
-                >
-                  <option>All</option>
-                  {CATEGORIES.map((categories) => (
-                    <option key={categories} value={categories}>
-                      {categories}
-                    </option>
-                  ))}
-                </select>
-              </label>
-              <div id="subtn" className="right floated column">
-                <button
-                  className="ui white basic inverted button"
-                  type="submit"
-                  value="Submit"
-                >
-                  Submit
-                </button>
-              </div>
-            </div>
+          <div
+            className="search-icon"
+            onClick={() => setIsOpen((isOpen) => !isOpen)}
+            style={
+              isOpen ? { visibility: "visible" } : { visibility: "visible" }
+            }
+          >
+            <img src={icon} id="icon" alt="map search icon" />
           </div>
-        </AnimatedForm>
-      </Container>
+          <AnimatedForm
+            style={{ ...rest2, display, opacity2, transform2 }}
+            className="form"
+            onSubmit={handleSubmit}
+          >
+            <div className="ui grid">
+              <div className="three column row">
+                <div className="three wide column"></div>
+                <div className="left floated column">
+                  <h2>Information</h2>
+                </div>
+                <div className="right floated column right aligned">
+                  <i
+                    aria-hidden="true"
+                    className="icon-custom"
+                    role="img"
+                    aria-label="Cancel"
+                    onClick={() => setIsOpen((isOpen) => !isOpen)}
+                    style={
+                      isOpen ? { visibility: "visible" } : { display: "none" }
+                    }
+                  ></i>
+                </div>
+              </div>
+              <Description />
+              <div className="two column row cont-box">
+                <label
+                  className="ten wide left floated column"
+                  htmlFor="categories"
+                >
+                  Category Filter
+                  <select
+                    className="ui dropdown mr-top"
+                    id="categories"
+                    value={categories}
+                    onChange={(event) => setCategories(event.target.value)}
+                  >
+                    <option>All</option>
+                    {CATEGORIES.map((categories) => (
+                      <option key={categories} value={categories}>
+                        {categories}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <div id="subtn" className="right floated column">
+                  <button
+                    className="ui white basic inverted button"
+                    type="submit"
+                    value="Submit"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </div>
+          </AnimatedForm>
+        </Container>
+      )}
+      {isMobile && (
+        <Container
+          style={{
+            ...rest,
+            width: size3,
+            height: size4,
+            top: transform,
+            left: transformMobile,
+          }}
+        >
+          <div
+            className="search-icon mobile"
+            onClick={() => setIsOpen((isOpen) => !isOpen)}
+            style={
+              isOpen ? { visibility: "visible" } : { visibility: "visible" }
+            }
+          >
+            <img src={icon} id="icon" alt="map search icon" />
+          </div>
+          <AnimatedForm
+            style={{ ...rest2, display, opacity2, transform2 }}
+            className="form-mobile"
+            onSubmit={handleSubmit}
+          >
+            <div className="ui grid">
+              <div className="three column row">
+                <div className="three wide column"></div>
+                <div className="left floated column">
+                  <h2 id="mobile-info">Information</h2>
+                </div>
+                <div className="right floated column right aligned">
+                  <i
+                    aria-hidden="true"
+                    className="icon-custom"
+                    role="img"
+                    aria-label="Cancel"
+                    onClick={() => setIsOpen((isOpen) => !isOpen)}
+                    style={
+                      isOpen ? { visibility: "visible" } : { display: "none" }
+                    }
+                  ></i>
+                </div>
+              </div>
+              <MobileDescription />
+              <div className="two column row cont-box">
+                <label
+                  className="nine wide left floated column"
+                  htmlFor="categories"
+                >
+                  Category Filter
+                  <select
+                    className="ui dropdown mr-top"
+                    id="categories"
+                    value={categories}
+                    onChange={(event) => setCategories(event.target.value)}
+                  >
+                    <option>All</option>
+                    {CATEGORIES.map((categories) => (
+                      <option key={categories} value={categories}>
+                        {categories}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <div id="subtn" className="right floated column ">
+                  <button
+                    id="subtn-mobile"
+                    className="ui white basic inverted button"
+                    type="submit"
+                    value="Submit"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </div>
+          </AnimatedForm>
+        </Container>
+      )}
     </>
   );
 }
